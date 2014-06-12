@@ -1,0 +1,1825 @@
+BEGIN HEADER
+   CharacterSet "CP1252"
+   ExportingTool "IBM InfoSphere DataStage Export"
+   ToolVersion "8"
+   ServerName "IIS87.DMFACTORIT.CL"
+   ToolInstanceID "hpardo"
+   MDISVersion "1.0"
+   Date "2014-06-11"
+   Time "10.28.51"
+   ServerVersion "8.7"
+END HEADER
+BEGIN DSJOB
+   Identifier "PRUEBA_MAILING_FD"
+   DateModified "2014-06-11"
+   TimeModified "10.27.39"
+   BEGIN DSRECORD
+      Identifier "ROOT"
+      OLEType "CJobDefn"
+      Readonly "0"
+      Name "PRUEBA_MAILING_FD"
+      NextID "3"
+      Container "V0"
+      JobVersion "56.0.0"
+      ControlAfterSubr "0"
+      MetaBag "CMetaProperty"
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "AdvancedRuntimeOptions"
+         Value "#DSProjectARTOptions#"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "IdentList"
+         Value "Copy_of_Sequential_File_0|Transformer_5|Funnel_14|Sort_31|Sort_40"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "ClientCodePage"
+         Value "1252"
+      END DSSUBRECORD
+      NULLIndicatorPosition "0"
+      OrchestrateCode =+=+=+=
+#################################################################
+#### STAGE: Copy_of_Sequential_File_0
+## Operator
+import
+## Operator options
+-schema record
+  {final_delim=end, delim=';', quote=none}
+(
+  RUT:string[max=9];
+  NOMBRE:string[max=15];
+  APELLIDO:string[max=15];
+  FECHA:string[max=8];
+  MONTO:string[max=10];
+)
+-file  '/CursoDS/hpardo/Entrada/DETALLES.dat'
+-rejects continue
+-reportProgress yes
+
+## General options
+[ident('Copy_of_Sequential_File_0'); jobmon_ident('Copy_of_Sequential_File_0')]
+## Outputs
+0> [] 'Copy_of_Sequential_File_0:DSLink2.v'
+;
+
+#################################################################
+#### STAGE: Transformer_5
+## Operator
+transform
+## Operator options
+-flag run
+-name 'V0S5_PRUEBA_MAILING_FD_Transformer_5'
+
+## General options
+[ident('Transformer_5'); jobmon_ident('Transformer_5'); seq]
+## Inputs
+0< [] 'Sort_31:DSLink32.v'
+## Outputs
+0> [] 'Transformer_5:DSLink7.v'
+1> [] 'Transformer_5:DSLink12.v'
+2> [] 'Transformer_5:DSLink19.v'
+;
+
+#################################################################
+#### STAGE: Funnel_14
+## Operator
+funnel
+## General options
+[ident('Funnel_14'); jobmon_ident('Funnel_14'); seq]
+## Inputs
+0< [] 'Transformer_5:DSLink12.v'
+1< [] 'Transformer_5:DSLink7.v'
+## Outputs
+0> [modify (
+keep
+  REGISTRO,New,Cab;
+)] 'Funnel_14:DSLink41.v'
+;
+
+#################################################################
+#### STAGE: Data_Set_17
+## Operator
+copy
+## General options
+[ident('Data_Set_17')]
+## Inputs
+0< [] 'Sort_40:DSLink19.v'
+## Outputs
+0>| [ds] '/CursoDS/hpardo/Datasets/PRUEBAMAILING.ds'
+;
+
+#################################################################
+#### STAGE: Sort_31
+## Operator
+tsort
+## Operator options
+-stable
+-key 'RUT'
+-asc
+-key 'NOMBRE'
+-asc
+
+## General options
+[ident('Sort_31'); jobmon_ident('Sort_31'); seq]
+## Inputs
+0< [] 'Copy_of_Sequential_File_0:DSLink2.v'
+## Outputs
+0> [modify (
+keep
+  RUT,NOMBRE,APELLIDO,FECHA,
+  MONTO;
+)] 'Sort_31:DSLink32.v'
+;
+
+#################################################################
+#### STAGE: Copy_of_Data_Set_17
+## Operator
+copy
+## General options
+[ident('Copy_of_Data_Set_17')]
+## Inputs
+0< [] 'Transformer_5:DSLink19.v'
+## Outputs
+0>| [ds] '/CursoDS/hpardo/Datasets/PRUEBAMAILING3.ds'
+;
+
+#################################################################
+#### STAGE: Sort_40
+## Operator
+tsort
+## Operator options
+-stable
+-key 'New'
+-asc
+-key 'Cab'
+-asc
+
+## General options
+[ident('Sort_40'); jobmon_ident('Sort_40')]
+## Inputs
+0< [] 'Funnel_14:DSLink41.v'
+## Outputs
+0> [modify (
+keep
+  REGISTRO,New,Cab;
+)] 'Sort_40:DSLink19.v'
+;
+
+
+=+=+=+=
+      IsTemplate "0"
+      JobType "3"
+      Category "\\Jobs\\hpardo"
+      CenturyBreakYear "30"
+      NextAliasID "2"
+      ParameterFileDDName "DD00001"
+      ReservedWordCheck "1"
+      TransactionSize "0"
+      ValidationStatus "0"
+      Uploadable "0"
+      PgmCustomizationFlag "0"
+      JobReportFlag "0"
+      AllowMultipleInvocations "0"
+      Act2ActOverideDefaults "0"
+      Act2ActEnableRowBuffer "0"
+      Act2ActUseIPC "0"
+      Act2ActBufferSize "0"
+      Act2ActIPCTimeout "0"
+      ExpressionSemanticCheckFlag "0"
+      TraceOption "0"
+      EnableCacheSharing "0"
+      RuntimeColumnPropagation "0"
+      RelStagesInJobStatus "-1"
+      WebServiceEnabled "0"
+      MFProcessMetaData "0"
+      MFProcessMetaDataXMLFileExchangeMethod "0"
+      IMSProgType "0"
+      CopyLibPrefix "ARDT"
+      RecordPerformanceResults "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0"
+      OLEType "CContainerView"
+      Readonly "0"
+      Name "Job"
+      NextID "1"
+      IsTopLevel "0"
+      StageList "V1S0|V0S5|V0S14|V0S17|V0S31|V2S0|V0S40"
+      StageXPos "48|288|480|744|168|288|600"
+      StageYPos "192|216|216|216|288|384|312"
+      StageTypes "CCustomStage|CTransformerStage|CCustomStage|CCustomStage|CCustomStage|CCustomStage|CCustomStage"
+      NextStageID "42"
+      SnapToGrid "1"
+      GridLines "0"
+      ZoomValue "100"
+      StageXSize "48|48|48|48|48|48|48"
+      StageYSize "48|48|48|48|48|48|48"
+      ContainerViewSizing "0100 0100 0817 0527 0000 0001 0000 0000"
+      StageNames "Copy_of_Sequential_File_0|Transformer_5|Funnel_14|Data_Set_17|Sort_31|Copy_of_Data_Set_17|Sort_40"
+      StageTypeIDs "PxSequentialFile|CTransformerStage|PxFunnel|PxDataSet|PxSort|PxDataSet|PxSort"
+      LinkNames "DSLink2|DSLink7,DSLink12,DSLink19|DSLink41| |DSLink32| |DSLink19"
+      LinkHasMetaDatas "True|True,True,True|True| |True| |True"
+      LinkTypes "1|1,1,1|1| |1| |1"
+      LinkNamePositionXs "133|399,399,312|564| |240| |647"
+      LinkNamePositionYs "245|228,252,310|268| |286| |297"
+      TargetStageIDs "V0S31|V0S14,V0S14,V2S0|V0S40| |V0S5| |V0S17"
+      SourceStageEffectiveExecutionModes "1|1,1,1|1| |1| |2"
+      SourceStageRuntimeExecutionModes "1|1,1,1|1| |1| |2"
+      TargetStageEffectiveExecutionModes "1|1,1,2|2| |1| |2"
+      TargetStageRuntimeExecutionModes "1|1,1,2|2| |1| |2"
+      LinkIsSingleOperatorLookup "False|False,False,False|False| |False| |False"
+      LinkIsSortSequential "False|False,False,False|False| |False| |False"
+      LinkSortMode "0|0,0,0|0| |0| |0"
+      LinkPartColMode "1|1,1,1|1| |1| |1"
+      LinkSourcePinIDs "V1S0P1|V0S5P2,V0S5P3,V0S5P7|V0S14P5| |V0S31P2| |V0S40P1"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S14"
+      OLEType "CCustomStage"
+      Readonly "0"
+      Name "Funnel_14"
+      NextID "6"
+      InputPins "V0S14P1|V0S14P2"
+      OutputPins "V0S14P5"
+      StageType "PxFunnel"
+      AllowColumnMapping "0"
+      Properties "CCustomProperty"
+      BEGIN DSSUBRECORD
+         Name "operator"
+         Value "funnel"
+      END DSSUBRECORD
+      MetaBag "CMetaProperty"
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "Execmode"
+         Value "seq"
+      END DSSUBRECORD
+      NextRecordID "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S14P1"
+      OLEType "CCustomInput"
+      Readonly "0"
+      Name "DSLink12"
+      Partner "V0S5|V0S5P3"
+      LinkType "1"
+      ConditionNotMet "fail"
+      LookupFail "fail"
+      MetaBag "CMetaProperty"
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "RTColumnProp"
+         Value "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "SeqSort"
+         Value "0"
+      END DSSUBRECORD
+      TransactionSize "0"
+      TXNBehaviour "0"
+      EnableTxGroup "0"
+      LinkMinimised "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S14P2"
+      OLEType "CCustomInput"
+      Readonly "0"
+      Name "DSLink7"
+      Partner "V0S5|V0S5P2"
+      LinkType "1"
+      ConditionNotMet "fail"
+      LookupFail "fail"
+      MetaBag "CMetaProperty"
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "RTColumnProp"
+         Value "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "SeqSort"
+         Value "0"
+      END DSSUBRECORD
+      TransactionSize "0"
+      TXNBehaviour "0"
+      EnableTxGroup "0"
+      LinkMinimised "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S14P5"
+      OLEType "CCustomOutput"
+      Readonly "0"
+      Name "DSLink41"
+      Partner "V0S40|V0S40P2"
+      Columns "COutputColumn"
+      BEGIN DSSUBRECORD
+         Name "REGISTRO"
+         SqlType "12"
+         Precision "255"
+         Scale "0"
+         Nullable "0"
+         KeyPosition "0"
+         DisplaySize "0"
+         Derivation "REGISTRO"
+         Group "0"
+         ParsedDerivation "REGISTRO"
+         SourceColumn "DSLink12.REGISTRO;DSLink7.REGISTRO"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "0"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "New"
+         SqlType "1"
+         Precision "0"
+         Scale "0"
+         Nullable "0"
+         KeyPosition "0"
+         DisplaySize "0"
+         Derivation "New"
+         Group "0"
+         ParsedDerivation "New"
+         SourceColumn "DSLink12.New;DSLink7.New"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "0"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "Cab"
+         SqlType "1"
+         Precision "0"
+         Scale "0"
+         Nullable "0"
+         KeyPosition "0"
+         DisplaySize "0"
+         Derivation "Cab"
+         Group "0"
+         ParsedDerivation "Cab"
+         SourceColumn "DSLink12.Cab;DSLink7.Cab"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "0"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      MetaBag "CMetaProperty"
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "DiskWriteInc"
+         Value "1048576"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "BufFreeRun"
+         Value "50"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "MaxMemBufSize"
+         Value "3145728"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "QueueUpperSize"
+         Value "0"
+      END DSSUBRECORD
+      LeftTextPos "564"
+      TopTextPos "268"
+      LinkMinimised "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S17"
+      OLEType "CCustomStage"
+      Readonly "0"
+      Name "Data_Set_17"
+      NextID "3"
+      InputPins "V0S17P2"
+      StageType "PxDataSet"
+      AllowColumnMapping "0"
+      NextRecordID "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S17P2"
+      OLEType "CCustomInput"
+      Readonly "0"
+      Name "DSLink19"
+      Partner "V0S40|V0S40P1"
+      LinkType "1"
+      ConditionNotMet "fail"
+      LookupFail "fail"
+      Properties "CCustomProperty"
+      BEGIN DSSUBRECORD
+         Name "dataset"
+         Value "/CursoDS/hpardo/Datasets/PRUEBAMAILING.ds"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "datasetmode"
+         Value ">| [ds"
+      END DSSUBRECORD
+      MetaBag "CMetaProperty"
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "RTColumnProp"
+         Value "0"
+      END DSSUBRECORD
+      TransactionSize "0"
+      TXNBehaviour "0"
+      EnableTxGroup "0"
+      LinkMinimised "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S31"
+      OLEType "CCustomStage"
+      Readonly "0"
+      Name "Sort_31"
+      NextID "3"
+      InputPins "V0S31P1"
+      OutputPins "V0S31P2"
+      StageType "PxSort"
+      AllowColumnMapping "0"
+      Properties "CCustomProperty"
+      BEGIN DSSUBRECORD
+         Name "operator"
+         Value "tsort"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "stable"
+         Value "stable"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "unique"
+         Value " "
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "stats"
+         Value " "
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "key"
+         Value "\(2)\(2)0\(1)\(3)key\(2)RUT\(2)0\(1)\(3)\(3)asc\\desc\(2)asc\(2)0\(1)\(3)\(3)sorted\\clustered\(2) \(2)0\(1)\(3)key\(2)NOMBRE\(2)0\(1)\(3)\(3)asc\\desc\(2)asc\(2)0\(1)\(3)\(3)sorted\\clustered\(2) \(2)0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "flagCluster"
+         Value " "
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "flagKey"
+         Value " "
+      END DSSUBRECORD
+      MetaBag "CMetaProperty"
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "Execmode"
+         Value "seq"
+      END DSSUBRECORD
+      NextRecordID "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S31P1"
+      OLEType "CCustomInput"
+      Readonly "0"
+      Name "DSLink2"
+      Partner "V1S0|V1S0P1"
+      LinkType "1"
+      ConditionNotMet "fail"
+      LookupFail "fail"
+      MetaBag "CMetaProperty"
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "RTColumnProp"
+         Value "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "SeqSort"
+         Value "0"
+      END DSSUBRECORD
+      TransactionSize "0"
+      TXNBehaviour "0"
+      EnableTxGroup "0"
+      LinkMinimised "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S31P2"
+      OLEType "CCustomOutput"
+      Readonly "0"
+      Name "DSLink32"
+      Partner "V0S5|V0S5P5"
+      Columns "COutputColumn"
+      BEGIN DSSUBRECORD
+         Name "RUT"
+         SqlType "12"
+         Precision "9"
+         Scale "0"
+         Nullable "0"
+         KeyPosition "0"
+         DisplaySize "0"
+         Derivation "DSLink2.RUT"
+         Group "0"
+         ParsedDerivation "DSLink2.RUT"
+         SourceColumn "DSLink2.RUT"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "0"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "NOMBRE"
+         SqlType "12"
+         Precision "15"
+         Scale "0"
+         Nullable "0"
+         KeyPosition "0"
+         DisplaySize "0"
+         Derivation "DSLink2.NOMBRE"
+         Group "0"
+         ParsedDerivation "DSLink2.NOMBRE"
+         SourceColumn "DSLink2.NOMBRE"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "0"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "APELLIDO"
+         SqlType "12"
+         Precision "15"
+         Scale "0"
+         Nullable "0"
+         KeyPosition "0"
+         DisplaySize "0"
+         Derivation "DSLink2.APELLIDO"
+         Group "0"
+         ParsedDerivation "DSLink2.APELLIDO"
+         SourceColumn "DSLink2.APELLIDO"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "0"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "FECHA"
+         SqlType "12"
+         Precision "8"
+         Scale "0"
+         Nullable "0"
+         KeyPosition "0"
+         DisplaySize "0"
+         Derivation "DSLink2.FECHA"
+         Group "0"
+         ParsedDerivation "DSLink2.FECHA"
+         SourceColumn "DSLink2.FECHA"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "0"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "MONTO"
+         SqlType "12"
+         Precision "10"
+         Scale "0"
+         Nullable "0"
+         KeyPosition "0"
+         DisplaySize "0"
+         Derivation "DSLink2.MONTO"
+         Group "0"
+         ParsedDerivation "DSLink2.MONTO"
+         SourceColumn "DSLink2.MONTO"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "0"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      MetaBag "CMetaProperty"
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "DiskWriteInc"
+         Value "1048576"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "BufFreeRun"
+         Value "50"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "MaxMemBufSize"
+         Value "3145728"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "QueueUpperSize"
+         Value "0"
+      END DSSUBRECORD
+      LeftTextPos "240"
+      TopTextPos "286"
+      LinkMinimised "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S40"
+      OLEType "CCustomStage"
+      Readonly "0"
+      Name "Sort_40"
+      NextID "3"
+      InputPins "V0S40P2"
+      OutputPins "V0S40P1"
+      StageType "PxSort"
+      AllowColumnMapping "0"
+      Properties "CCustomProperty"
+      BEGIN DSSUBRECORD
+         Name "operator"
+         Value "tsort"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "stable"
+         Value "stable"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "unique"
+         Value " "
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "stats"
+         Value " "
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "key"
+         Value "\(2)\(2)0\(1)\(3)key\(2)New\(2)0\(1)\(3)\(3)asc\\desc\(2)asc\(2)0\(1)\(3)\(3)sorted\\clustered\(2) \(2)0\(1)\(3)key\(2)Cab\(2)0\(1)\(3)\(3)asc\\desc\(2)asc\(2)0\(1)\(3)\(3)sorted\\clustered\(2) \(2)0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "flagCluster"
+         Value " "
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "flagKey"
+         Value " "
+      END DSSUBRECORD
+      NextRecordID "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S40P1"
+      OLEType "CCustomOutput"
+      Readonly "0"
+      Name "DSLink19"
+      Partner "V0S17|V0S17P2"
+      Columns "COutputColumn"
+      BEGIN DSSUBRECORD
+         Name "REGISTRO"
+         SqlType "12"
+         Precision "255"
+         Scale "0"
+         Nullable "0"
+         KeyPosition "0"
+         DisplaySize "0"
+         Derivation "DSLink41.REGISTRO"
+         Group "0"
+         ParsedDerivation "DSLink41.REGISTRO"
+         SourceColumn "DSLink41.REGISTRO"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "0"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "New"
+         SqlType "1"
+         Precision "0"
+         Scale "0"
+         Nullable "0"
+         KeyPosition "0"
+         DisplaySize "0"
+         Derivation "DSLink41.New"
+         Group "0"
+         ParsedDerivation "DSLink41.New"
+         SourceColumn "DSLink41.New"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "0"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "Cab"
+         SqlType "1"
+         Precision "0"
+         Scale "0"
+         Nullable "0"
+         KeyPosition "0"
+         DisplaySize "0"
+         Derivation "DSLink41.Cab"
+         Group "0"
+         ParsedDerivation "DSLink41.Cab"
+         SourceColumn "DSLink41.Cab"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "0"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      LeftTextPos "647"
+      TopTextPos "297"
+      LinkMinimised "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S40P2"
+      OLEType "CCustomInput"
+      Readonly "0"
+      Name "DSLink41"
+      Partner "V0S14|V0S14P5"
+      LinkType "1"
+      ConditionNotMet "fail"
+      LookupFail "fail"
+      MetaBag "CMetaProperty"
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "RTColumnProp"
+         Value "0"
+      END DSSUBRECORD
+      TransactionSize "0"
+      TXNBehaviour "0"
+      EnableTxGroup "0"
+      LinkMinimised "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S5"
+      OLEType "CTransformerStage"
+      Readonly "0"
+      Name "Transformer_5"
+      NextID "8"
+      InputPins "V0S5P5"
+      OutputPins "V0S5P2|V0S5P3|V0S5P7"
+      MetaBag "CMetaProperty"
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "TrxGenCode"
+         Value =+=+=+=
+//
+// Generated file to implement the V0S5_PRUEBA_MAILING_FD_Transformer_5 transform operator.
+//
+
+// define our input/output link names
+inputname 0 DSLink32;
+outputname 0 DSLink7;
+outputname 1 DSLink12;
+outputname 2 DSLink19;
+
+initialize {
+	// define our control variables
+	int8 RowRejected0;
+	int8 NullSetVar0;
+
+	// declare our intermediate variables for this section
+	string InterVar0_0;
+	string InterVar0_1;
+	string InterVar0_4;
+	string InterVar0_5;
+
+	// initialise constant values which require conversion
+	InterVar0_0 = 1;
+	InterVar0_1 = 0;
+	InterVar0_4 = ".1";
+	InterVar0_5 = 2;
+	// Stage variable declaration and initialisation
+	string StageVar0_StageVar;
+	StageVar0_StageVar = "";
+	string StageVar0_StageVar2;
+	StageVar0_StageVar2 = "";
+	string StageVar0_VarCab;
+	StageVar0_VarCab = "";
+	string StageVar0_VarDet;
+	StageVar0_VarDet = "";
+	string StageVar0_StageVar1;
+	StageVar0_StageVar1 = "";
+	string StageVar0_StageVar3;
+	StageVar0_StageVar3 = "";
+}
+
+mainloop {
+
+	// declare our intermediate variables for this section
+	dfloat InterVar0_2;
+	string InterVar0_3;
+
+	// evaluate the stage variables first
+	if ((DSLink32.RUT != substring_1(StageVar0_VarCab , 1 , 9))) {
+		StageVar0_StageVar = InterVar0_0;
+	} else {
+		StageVar0_StageVar = InterVar0_1;
+	}
+	//;
+	if ((DSLink32.RUT == substring_1(StageVar0_VarDet , 1 , 9))) {
+		StageVar0_StageVar2 = InterVar0_0;
+	} else {
+		StageVar0_StageVar2 = InterVar0_1;
+	}
+	//;
+	StageVar0_VarCab = ((DSLink32.RUT + DSLink32.NOMBRE) + DSLink32.APELLIDO);
+	StageVar0_VarDet = ((DSLink32.RUT + DSLink32.FECHA) + DSLink32.MONTO);
+	if ((StageVar0_StageVar == InterVar0_0)) {
+		InterVar0_2 = StageVar0_StageVar1;
+		InterVar0_3 = InterVar0_2 + 1;
+		StageVar0_StageVar1 = InterVar0_3;
+	} else {
+		StageVar0_StageVar1 = StageVar0_StageVar1;
+	}
+	//;
+	StageVar0_StageVar3 = (StageVar0_StageVar1 + InterVar0_4);
+
+	// initialise the rejected row variable
+	RowRejected0 = 1;
+
+	// evaluate constraint and columns for link: DSLink7
+	if ((StageVar0_StageVar == InterVar0_0))
+	{
+		DSLink7.REGISTRO = StageVar0_VarCab;
+		DSLink7.New = StageVar0_StageVar1;
+		DSLink7.Cab = InterVar0_0;
+		writerecord 0;
+		RowRejected0 = 0;
+	}
+	// evaluate columns (no constraints) for link: DSLink12
+	DSLink12.REGISTRO = StageVar0_VarDet;
+	DSLink12.New = StageVar0_StageVar3;
+	DSLink12.Cab = InterVar0_5;
+	writerecord 1;
+	RowRejected0 = 0;
+	// evaluate columns (no constraints) for link: DSLink19
+	writerecord 2;
+	RowRejected0 = 0;
+}
+
+finish {
+}
+
+=+=+=+=
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "TrxGenCache"
+         Value "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "TrxClassName"
+         Value "V0S5_PRUEBA_MAILING_FD_Transformer_5"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "Execmode"
+         Value "seq"
+      END DSSUBRECORD
+      ValidationStatus "0"
+      StageType "CTransformerStage"
+      BlockSize "0"
+      SKKeySourceType "file"
+      StageVars "CStageVar"
+      BEGIN DSSUBRECORD
+         Name "StageVar"
+         Expression "IF DSLink32.RUT <> VarCab[1,9] then 1 else 0"
+         SqlType "12"
+         ParsedExpression " IF DSLink32.RUT <> VarCab[1, 9] then 1 else 0"
+         SourceColumn "DSLink32.RUT"
+         StageVars "VarCab"
+         Precision "255"
+         ColScale "0"
+         ExtendedPrecision "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "StageVar2"
+         Expression "IF DSLink32.RUT = VarDet[1,9] then 1 else 0"
+         SqlType "12"
+         ParsedExpression " IF DSLink32.RUT = VarDet[1, 9] then 1 else 0"
+         SourceColumn "DSLink32.RUT"
+         StageVars "VarDet"
+         Precision "255"
+         ColScale "0"
+         ExtendedPrecision "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "VarCab"
+         Expression "DSLink32.RUT: DSLink32.NOMBRE: DSLink32.APELLIDO"
+         SqlType "12"
+         ParsedExpression "DSLink32.RUT : DSLink32.NOMBRE : DSLink32.APELLIDO"
+         SourceColumn "DSLink32.RUT;DSLink32.NOMBRE;DSLink32.APELLIDO"
+         Precision "255"
+         ColScale "0"
+         ExtendedPrecision "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "VarDet"
+         Expression "DSLink32.RUT: DSLink32.FECHA: DSLink32.MONTO"
+         SqlType "12"
+         ParsedExpression "DSLink32.RUT : DSLink32.FECHA : DSLink32.MONTO"
+         SourceColumn "DSLink32.RUT;DSLink32.FECHA;DSLink32.MONTO"
+         Precision "255"
+         ColScale "0"
+         ExtendedPrecision "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "StageVar1"
+         Expression "IF StageVar=1 then StageVar1+1 Else StageVar1"
+         SqlType "12"
+         ParsedExpression " IF StageVar = 1 then StageVar1 + 1 Else StageVar1"
+         StageVars "StageVar;StageVar1"
+         Precision "255"
+         ColScale "0"
+         ExtendedPrecision "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "StageVar3"
+         Expression "StageVar1:'.1'"
+         SqlType "12"
+         ParsedExpression "StageVar1 : '.1'"
+         StageVars "StageVar1"
+         Precision "255"
+         ColScale "0"
+         ExtendedPrecision "0"
+      END DSSUBRECORD
+      StageVarsMinimised "0"
+      LoopVarsMaximised "0"
+      MaxLoopIterations "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S5P2"
+      OLEType "CTrxOutput"
+      Readonly "0"
+      Name "DSLink7"
+      Partner "V0S14|V0S14P2"
+      Constraint "StageVar=1"
+      Reject "0"
+      ErrorPin "0"
+      RowLimit "0"
+      ParsedConstraint "StageVar = 1"
+      Columns "COutputColumn"
+      BEGIN DSSUBRECORD
+         Name "REGISTRO"
+         SqlType "12"
+         Precision "255"
+         Scale "0"
+         Nullable "0"
+         KeyPosition "0"
+         DisplaySize "0"
+         Derivation "VarCab "
+         Group "0"
+         ParsedDerivation "VarCab"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         StageVars "VarCab"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "0"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "New"
+         SqlType "1"
+         Precision "0"
+         Scale "0"
+         Nullable "0"
+         KeyPosition "0"
+         DisplaySize "0"
+         Derivation "StageVar1"
+         Group "0"
+         ParsedDerivation "StageVar1"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         StageVars "StageVar1"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "0"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "Cab"
+         SqlType "1"
+         Precision "0"
+         Scale "0"
+         Nullable "0"
+         KeyPosition "0"
+         DisplaySize "0"
+         Derivation "1"
+         Group "0"
+         ParsedDerivation "1"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "0"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      MetaBag "CMetaProperty"
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "DiskWriteInc"
+         Value "1048576"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "BufFreeRun"
+         Value "50"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "MaxMemBufSize"
+         Value "3145728"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "QueueUpperSize"
+         Value "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "Schema"
+         Value =+=+=+=
+record
+(
+  REGISTRO:string[max=255];
+  New:string;
+  Cab:string;
+)
+=+=+=+=
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "SortOrderPreserved"
+         Value "1"
+      END DSSUBRECORD
+      StageVars "StageVar"
+      LeftTextPos "399"
+      TopTextPos "228"
+      LinkMinimised "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S5P3"
+      OLEType "CTrxOutput"
+      Readonly "0"
+      Name "DSLink12"
+      Partner "V0S14|V0S14P1"
+      Reject "0"
+      ErrorPin "0"
+      RowLimit "0"
+      Columns "COutputColumn"
+      BEGIN DSSUBRECORD
+         Name "REGISTRO"
+         SqlType "12"
+         Precision "255"
+         Scale "0"
+         Nullable "0"
+         KeyPosition "0"
+         DisplaySize "0"
+         Derivation "VarDet"
+         Group "0"
+         ParsedDerivation "VarDet"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         StageVars "VarDet"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "0"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "New"
+         SqlType "1"
+         Precision "0"
+         Scale "0"
+         Nullable "0"
+         KeyPosition "0"
+         DisplaySize "0"
+         Derivation "StageVar3"
+         Group "0"
+         ParsedDerivation "StageVar3"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         StageVars "StageVar3"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "0"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "Cab"
+         SqlType "1"
+         Precision "0"
+         Scale "0"
+         Nullable "0"
+         KeyPosition "0"
+         DisplaySize "0"
+         Derivation "2"
+         Group "0"
+         ParsedDerivation "2"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "0"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      MetaBag "CMetaProperty"
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "DiskWriteInc"
+         Value "1048576"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "BufFreeRun"
+         Value "50"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "MaxMemBufSize"
+         Value "3145728"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "QueueUpperSize"
+         Value "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "Schema"
+         Value =+=+=+=
+record
+(
+  REGISTRO:string[max=255];
+  New:string;
+  Cab:string;
+)
+=+=+=+=
+      END DSSUBRECORD
+      LeftTextPos "399"
+      TopTextPos "252"
+      LinkMinimised "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S5P5"
+      OLEType "CTrxInput"
+      Readonly "0"
+      Name "DSLink32"
+      Partner "V0S31|V0S31P2"
+      LinkType "1"
+      MetaBag "CMetaProperty"
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "RTColumnProp"
+         Value "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "Schema"
+         Value =+=+=+=
+record
+(
+  RUT:string[max=9];
+  NOMBRE:string[max=15];
+  APELLIDO:string[max=15];
+  FECHA:string[max=8];
+  MONTO:string[max=10];
+)
+=+=+=+=
+      END DSSUBRECORD
+      MultiRow "0"
+      LinkMinimised "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S5P7"
+      OLEType "CTrxOutput"
+      Readonly "0"
+      Name "DSLink19"
+      Partner "V2S0|V2S0P1"
+      Reject "0"
+      ErrorPin "0"
+      RowLimit "0"
+      Columns "COutputColumn"
+      BEGIN DSSUBRECORD
+         Name "RUT"
+         SqlType "12"
+         Precision "9"
+         Scale "0"
+         Nullable "0"
+         KeyPosition "0"
+         DisplaySize "0"
+         Derivation "DSLink32.RUT"
+         Group "0"
+         ParsedDerivation "DSLink32.RUT"
+         SourceColumn "DSLink32.RUT"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "0"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "NOMBRE"
+         SqlType "12"
+         Precision "15"
+         Scale "0"
+         Nullable "0"
+         KeyPosition "0"
+         DisplaySize "0"
+         Derivation "DSLink32.NOMBRE"
+         Group "0"
+         ParsedDerivation "DSLink32.NOMBRE"
+         SourceColumn "DSLink32.NOMBRE"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "0"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "APELLIDO"
+         SqlType "12"
+         Precision "15"
+         Scale "0"
+         Nullable "0"
+         KeyPosition "0"
+         DisplaySize "0"
+         Derivation "DSLink32.APELLIDO"
+         Group "0"
+         ParsedDerivation "DSLink32.APELLIDO"
+         SourceColumn "DSLink32.APELLIDO"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "0"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "FECHA"
+         SqlType "12"
+         Precision "8"
+         Scale "0"
+         Nullable "0"
+         KeyPosition "0"
+         DisplaySize "0"
+         Derivation "DSLink32.FECHA"
+         Group "0"
+         ParsedDerivation "DSLink32.FECHA"
+         SourceColumn "DSLink32.FECHA"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "0"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "MONTO"
+         SqlType "12"
+         Precision "10"
+         Scale "0"
+         Nullable "0"
+         KeyPosition "0"
+         DisplaySize "0"
+         Derivation "DSLink32.MONTO"
+         Group "0"
+         ParsedDerivation "DSLink32.MONTO"
+         SourceColumn "DSLink32.MONTO"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "0"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      MetaBag "CMetaProperty"
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "DiskWriteInc"
+         Value "1048576"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "BufFreeRun"
+         Value "50"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "MaxMemBufSize"
+         Value "3145728"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "QueueUpperSize"
+         Value "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "Schema"
+         Value =+=+=+=
+record
+(
+  RUT:string[max=9];
+  NOMBRE:string[max=15];
+  APELLIDO:string[max=15];
+  FECHA:string[max=8];
+  MONTO:string[max=10];
+)
+=+=+=+=
+      END DSSUBRECORD
+      LeftTextPos "312"
+      TopTextPos "310"
+      LinkMinimised "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V1S0"
+      OLEType "CCustomStage"
+      Readonly "0"
+      Name "Copy_of_Sequential_File_0"
+      NextID "2"
+      OutputPins "V1S0P1"
+      StageType "PxSequentialFile"
+      AllowColumnMapping "0"
+      NextRecordID "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V1S0P1"
+      OLEType "CCustomOutput"
+      Readonly "0"
+      Name "DSLink2"
+      Partner "V0S31|V0S31P1"
+      Properties "CCustomProperty"
+      BEGIN DSSUBRECORD
+         Name "schema"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "selection"
+         Value "file"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "file "
+         Value "\(2)\(2)0\(1)\(3)file \(2)/CursoDS/hpardo/Entrada/DETALLES.dat\(2)0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "keepPartitions"
+         Value " "
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "missingFile"
+         Value " "
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "rejects"
+         Value "continue"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "reportProgress"
+         Value "yes"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "firstLineColumnNames"
+         Value " "
+      END DSSUBRECORD
+      Columns "COutputColumn"
+      BEGIN DSSUBRECORD
+         Name "RUT"
+         SqlType "12"
+         Precision "9"
+         Scale "0"
+         Nullable "0"
+         KeyPosition "0"
+         DisplaySize "0"
+         Group "0"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "0"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "NOMBRE"
+         SqlType "12"
+         Precision "15"
+         Scale "0"
+         Nullable "0"
+         KeyPosition "0"
+         DisplaySize "0"
+         Group "0"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "0"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "APELLIDO"
+         SqlType "12"
+         Precision "15"
+         Scale "0"
+         Nullable "0"
+         KeyPosition "0"
+         DisplaySize "0"
+         Group "0"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "0"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "FECHA"
+         SqlType "12"
+         Precision "8"
+         Scale "0"
+         Nullable "0"
+         KeyPosition "0"
+         DisplaySize "0"
+         Group "0"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "0"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "MONTO"
+         SqlType "12"
+         Precision "10"
+         Scale "0"
+         Nullable "0"
+         KeyPosition "0"
+         DisplaySize "0"
+         Group "0"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "0"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      MetaBag "CMetaProperty"
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "SchemaFormat"
+         Value "final_delim=end, delim=';', quote=none"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "DiskWriteInc"
+         Value "1048576"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "BufFreeRun"
+         Value "50"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "MaxMemBufSize"
+         Value "3145728"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "QueueUpperSize"
+         Value "0"
+      END DSSUBRECORD
+      LeftTextPos "133"
+      TopTextPos "245"
+      LinkMinimised "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V2S0"
+      OLEType "CCustomStage"
+      Readonly "0"
+      Name "Copy_of_Data_Set_17"
+      NextID "2"
+      InputPins "V2S0P1"
+      StageType "PxDataSet"
+      AllowColumnMapping "0"
+      NextRecordID "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V2S0P1"
+      OLEType "CCustomInput"
+      Readonly "0"
+      Name "DSLink19"
+      Partner "V0S5|V0S5P7"
+      LinkType "1"
+      ConditionNotMet "fail"
+      LookupFail "fail"
+      Properties "CCustomProperty"
+      BEGIN DSSUBRECORD
+         Name "dataset"
+         Value "/CursoDS/hpardo/Datasets/PRUEBAMAILING3.ds"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "datasetmode"
+         Value ">| [ds"
+      END DSSUBRECORD
+      MetaBag "CMetaProperty"
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "RTColumnProp"
+         Value "0"
+      END DSSUBRECORD
+      TransactionSize "0"
+      TXNBehaviour "0"
+      EnableTxGroup "0"
+      LinkMinimised "0"
+   END DSRECORD
+END DSJOB
