@@ -18,9 +18,9 @@ echo "comienza  bkp  archivos de Entrada" >> $FILE_LOG
 #############################################
 # Realiza Back up                           #
 #############################################
-DIR_INPUT=/u/data/internet/INF_PROG1
+DIR_INPUT=/u/data/sgd/input/mailing/
 
-FILE_INPUT1=INF_PROG1
+FILE_INPUT1=INF_PROG1_CCA
 
 
 mv $DIR_INPUT$FILE_INPUT1 ${DIR_INPUT}bkp/$FILE_INPUT1.$FECHA_PROC

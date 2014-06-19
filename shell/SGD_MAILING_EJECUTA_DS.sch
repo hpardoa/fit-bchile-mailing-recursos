@@ -31,6 +31,8 @@ sequencer=SEQ_SGD_MAILING_INF_PROG1_CCA
 archlog=/u/ulog/$sequencer.out
 datashome=/IBM/InformationServer/Server/DSEngine/bin
 arch_conf_Sev="/u/data/CDW/ConfigSev.txt"
+arch_final=/u/data/SGD/output/mailing/MovNoFact.txt
+arch_resp=/u/data/SGD/output/mailing/MovNoFact_email.txt
 proyecto=`grep ^PROYECTO ${INI} | awk -F= '{print $2}'`
 ## Setea directorio
 cd /IBM/InformationServer/Server/DSEngine/
@@ -41,7 +43,34 @@ echo "============================================================" >> $archlog
 echo "Proceso Ejecutado el dia `date '+%Y-%m-%d %H:%M:%S'`" >> $archlog
 
 ## Ejecucion
-$datashome/dsjob -run -mode NORMAL -wait -jobstatus $proyecto $sequencer
+$datashome/dsjob -run -mode NORMAL -wait -jobstatus $proyecto $sequencer;nRet=$?
+
+if [ "$nRet" == 1 -o "$nRet" == 2 ]; then
+   DIA_TERM=`date +"%d/%m/%Y %H:%M:%S"`
+   echo " El proceso se ejecuto correctamente con Status Code: $nRet" >> $FILE_LOG
+   dsjob -jobinfo $PROYECTO $SEQUENCER                                >> $FILE_LOG
+   echo "Ejecución Finalizada : $DIA_TERM "                           >> $FILE_LOG
+   cp $arch_final $arch_resp
+   compress $arch_resp
+   exit 0
+else
+   DIA_TERM=`date +"%d/%m/%Y %H:%M:%S"`
+   echo "Proceso ejecutado con errores Status Code: $nRet"            >> $FILE_LOG
+   dsjob -jobinfo $PROYECTO $SEQUENCER                                >> $FILE_LOG
+   echo "Ejecución Finalizada  : $DIA_TERM "                          >> $FILE_LOG
+   exit 99
+fi
+ 
+############################################################################
+if [ "$?" = "0" ]; then
+cp $arch_final $arch_resp
+compress $arch_resp 
+      exit 0
+else
+        exit 99
+fi
+
+
 ## Status Code de la ejecucion del Sequencer
 run_stat=$?
 echo "Status Code (run_stat): "$run_stat >> $archlog
