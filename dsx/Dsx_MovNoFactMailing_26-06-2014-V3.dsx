@@ -5,8 +5,8 @@ BEGIN HEADER
    ServerName "D48R"
    ToolInstanceID "BCHSGD"
    MDISVersion "1.0"
-   Date "2014-06-26"
-   Time "14.58.52"
+   Date "2014-06-27"
+   Time "12.52.07"
    ServerVersion "8.1"
 END HEADER
 BEGIN DSJOB
@@ -55397,8 +55397,8 @@ record
 END DSJOB
 BEGIN DSJOB
    Identifier "Job_10_Final"
-   DateModified "2014-06-26"
-   TimeModified "14.54.20"
+   DateModified "2014-06-27"
+   TimeModified "12.49.24"
    BEGIN DSRECORD
       Identifier "ROOT"
       OLEType "CJobDefn"
@@ -55999,23 +55999,23 @@ keep
       NextID "1"
       IsTopLevel "0"
       StageList "V0S10|V0S26|V19S0|V0S32|V0S35|V0S38|V0S42|V0S44|V0S51|V0S56|V0S59|V0S63|V24S0|V25S0|V0S123"
-      StageXPos "1296|478|312|310|192|312|624|624|822|1032|1128|731|24|860|619"
-      StageYPos "217|336|24|336|334|168|337|192|336|336|432|477|336|40|40"
+      StageXPos "996|453|312|310|192|312|591|589|723|887|885|657|24|743|589"
+      StageYPos "444|333|24|336|334|168|332|192|331|332|444|443|336|39|37"
       StageTypes "CCustomStage|CTransformerStage|CCustomStage|CCustomStage|CTransformerStage|CTransformerStage|CCustomStage|CTransformerStage|CTransformerStage|CCustomStage|CCustomStage|CCustomStage|CCustomStage|CCustomStage|CCustomStage"
-      NextStageID "147"
+      NextStageID "153"
       SnapToGrid "2"
       GridLines "0"
-      ZoomValue "80"
+      ZoomValue "100"
       StageXSize "48|48|48|48|48|48|47|48|48|48|48|48|48|48|48"
       StageYSize "48|48|48|48|48|48|48|48|48|48|48|48|48|48|48"
-      ContainerViewSizing "0028 0164 0829 0759 0000 0001 0000 0000"
+      ContainerViewSizing "0028 0164 0829 0759 0000 0001 0208 0000"
       StageNames "Seq_Arch_Final_XEROX|Trf_Join|SGD_Clientes_ds|Join_32|Trf_Traspaso|Trf_Clientes|Join_42|Trf_Filtro|Transformer_51|Funnel_56|Sort_59|Sort_63|Ds_RegTotales|Ds_INF_PROG1_CCA_EMAIL|Rm_Email_Dupp"
       StageTypeIDs "PxSequentialFile|CTransformerStage|PxDataSet|PxJoin|CTransformerStage|CTransformerStage|PxJoin|CTransformerStage|CTransformerStage|PxFunnel|PxSort|PxSort|PxDataSet|PxDataSet|PxRemDup"
       LinkNames " |Lnk_Tras_Join|Lnk_Clientes|Lnk_Trf|Lnk_Tras_Join|Lnk_Join|Lnk_sort|Lnk_Join|Lnk_Cabecera,Lnk_Detalle,Lnk_RefControl|Lnk_Sort|Lnk_Documento_Final|LnkT|Lnk_RegTotales|Lnk_Filtro_Email|DSLink124"
       LinkHasMetaDatas " |True|True|True|True|True|True|True|True,True,True|True|True|True|True|True|True"
       LinkTypes " |1|1|1|1|1|1|1|1,1,1|1|1|1|1|1|1"
-      LinkNamePositionXs " |544|339|393|242|337|650|648|963,894,916|1104|1168|788|80|742|646"
-      LinkNamePositionYs " |360|106|369|341|263|436|281|360,360,348|388|403|448|360|68|91"
+      LinkNamePositionXs " |544|339|385|242|337|650|613|807,792,800|911|939|707|80|742|611"
+      LinkNamePositionYs " |360|106|360|341|263|436|258|355,366,336|396|468|427|360|68|117"
       TargetStageIDs " |V0S42|V0S38|V0S26|V0S32|V0S32|V0S63|V0S42|V0S56,V0S56,V0S56|V0S59|V0S10|V0S51|V0S35|V0S123|V0S44"
       SourceStageEffectiveExecutionModes " |2|2|2|2|2|2|2|1,1,1|1|1|2|2|2|2"
       SourceStageRuntimeExecutionModes " |2|2|2|2|2|2|2|1,1,1|1|1|2|2|2|2"
@@ -56621,15 +56621,15 @@ keep
          Name "QueueUpperSize"
          Value "0"
       END DSSUBRECORD
-      LeftTextPos "646"
-      TopTextPos "91"
+      LeftTextPos "611"
+      TopTextPos "117"
    END DSRECORD
    BEGIN DSRECORD
       Identifier "V0S26"
       OLEType "CTransformerStage"
       Readonly "0"
       Name "Trf_Join"
-      NextID "6"
+      NextID "8"
       InputPins "V0S26P1"
       OutputPins "V0S26P2"
       MetaBag "CMetaProperty"
@@ -56685,6 +56685,7 @@ initialize {
 	string InterVar0_31;
 	string InterVar0_32;
 	string InterVar0_33;
+	string InterVar0_34;
 
 	// initialise constant values which require conversion
 	InterVar0_0 = "Banco De Chile";
@@ -56710,11 +56711,12 @@ initialize {
 	InterVar0_26 = "N";
 	InterVar0_27 = "  ";
 	InterVar0_28 = "I";
-	InterVar0_29 = "C";
-	InterVar0_30 = "%yyyy-%mm-%dd";
-	InterVar0_31 = "F";
-	InterVar0_32 = "Mov_NoFact";
-	InterVar0_33 = "00001";
+	InterVar0_29 = "*";
+	InterVar0_30 = "C";
+	InterVar0_31 = "%yyyy-%mm-%dd";
+	InterVar0_32 = "F";
+	InterVar0_33 = "Mov_NoFact";
+	InterVar0_34 = "00001";
 	// Stage variable declaration and initialisation
 	string StageVar0_COLOR;
 	StageVar0_COLOR = "";
@@ -56754,6 +56756,8 @@ initialize {
 	StageVar0_DescripcionTRX = "";
 	string StageVar0_DescripcionTransac;
 	StageVar0_DescripcionTransac = "";
+	string StageVar0_EstadoTransac;
+	StageVar0_EstadoTransac = "";
 	string StageVar0_Filler;
 	StageVar0_Filler = "";
 	string StageVar0_RegDetalle;
@@ -56845,7 +56849,7 @@ mainloop {
 		StageVar0_TipoMov = InterVar0_26;
 	} else {
 		if ((substring_1(StageVar0_Pais , 1 , 2) == InterVar0_27)) {
-			StageVar0_TipoMov = InterVar0_22;
+			StageVar0_TipoMov = InterVar0_26;
 		} else {
 			StageVar0_TipoMov = InterVar0_28;
 		}
@@ -56860,19 +56864,25 @@ mainloop {
 		StageVar0_DescripcionTransac = substring_1(Lnk_Trf.descripcionTransaccion , 1 , 10);
 	}
 	//;
+	if ((trimc_string(Lnk_Trf.estadoTransaccion) == InterVar0_3)) {
+		StageVar0_EstadoTransac = InterVar0_29;
+	} else {
+		StageVar0_EstadoTransac = InterVar0_22;
+	}
+	//;
 	StageVar0_Filler = string_of_substring(InterVar0_22 , 26);
-	StageVar0_RegDetalle = ((((((((((((StageVar0_TipoRegistro + StageVar0_RutCliente) + StageVar0_DVCliente) + StageVar0_NumTar) + StageVar0_FechaTRX) + StageVar0_HoraTRX) + StageVar0_MontoTRX) + StageVar0_Ciudad) + StageVar0_Pais) + StageVar0_TipoMov) + StageVar0_DescripcionTRX) + StageVar0_DescripcionTransac) + StageVar0_Filler);
+	StageVar0_RegDetalle = (((((((((((((StageVar0_TipoRegistro + StageVar0_RutCliente) + StageVar0_DVCliente) + StageVar0_NumTar) + StageVar0_FechaTRX) + StageVar0_HoraTRX) + StageVar0_MontoTRX) + StageVar0_Ciudad) + StageVar0_Pais) + StageVar0_TipoMov) + StageVar0_DescripcionTRX) + StageVar0_DescripcionTransac) + StageVar0_EstadoTransac) + StageVar0_Filler);
 
 	// evaluate columns (no constraints) for link: Lnk_Tras_Join
-	Lnk_Tras_Join.TipoRegistro = InterVar0_29;
+	Lnk_Tras_Join.TipoRegistro = InterVar0_30;
 	Lnk_Tras_Join.numeroTarjeta = Lnk_Trf.numeroTarjeta;
-	Lnk_Tras_Join.fechaConsulta = date_from_string(Lnk_Trf.fechaConsulta , InterVar0_30);
+	Lnk_Tras_Join.fechaConsulta = date_from_string(Lnk_Trf.fechaConsulta , InterVar0_31);
 	Lnk_Tras_Join.NombreCliente = Lnk_Trf.nombreTitular;
-	Lnk_Tras_Join.Email = InterVar0_31;
+	Lnk_Tras_Join.Email = InterVar0_32;
 	Lnk_Tras_Join.CLI_COLOR = StageVar0_COLOR;
 	Lnk_Tras_Join.CLI_BANCA = StageVar0_BANCA;
 	InterVar0_8 = (RowCount0_0 + 1);
-	Lnk_Tras_Join.IdPdf = ((((InterVar0_32 + string_from_date(current_date())) + substring_1(Lnk_Trf.nombreTitular , 1 , 2)) + InterVar0_33) + InterVar0_8);
+	Lnk_Tras_Join.IdPdf = ((((InterVar0_33 + string_from_date(current_date())) + substring_1(Lnk_Trf.nombreTitular , 1 , 2)) + InterVar0_34) + InterVar0_8);
 	Lnk_Tras_Join.RUT = Lnk_Trf.RutCliente;
 	Lnk_Tras_Join.RegDetalle = StageVar0_RegDetalle;
 	Lnk_Tras_Join.DVCliente = StageVar0_DVCliente;
@@ -57060,9 +57070,9 @@ finish {
       END DSSUBRECORD
       BEGIN DSSUBRECORD
          Name "TipoMov"
-         Expression "IF Pais[1,2]='CL' THEN 'N' ELSE IF Pais[1,2]='  ' then ' ' else 'I'"
+         Expression "IF Pais[1,2]='CL' THEN 'N' ELSE IF Pais[1,2]='  ' then 'N' else 'I'"
          SqlType "12"
-         ParsedExpression " IF Pais[1, 2] = 'CL' THEN 'N' ELSE  IF Pais[1, 2] = '  ' then ' ' else 'I'"
+         ParsedExpression " IF Pais[1, 2] = 'CL' THEN 'N' ELSE  IF Pais[1, 2] = '  ' then 'N' else 'I'"
          StageVars "Pais"
          Precision "1"
          ColScale "0"
@@ -57100,6 +57110,16 @@ finish {
          ExtendedPrecision "0"
       END DSSUBRECORD
       BEGIN DSSUBRECORD
+         Name "EstadoTransac"
+         Expression "IF Trim(Lnk_Trf.estadoTransaccion)=1 Then '*' Else ' '"
+         SqlType "12"
+         ParsedExpression " IF Trim(Lnk_Trf.estadoTransaccion) = 1 Then '*' Else ' '"
+         SourceColumn "Lnk_Trf.estadoTransaccion"
+         Precision "255"
+         ColScale "0"
+         ExtendedPrecision "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
          Name "Filler"
          Expression "STR(\" \",26)"
          SqlType "12"
@@ -57110,10 +57130,10 @@ finish {
       END DSSUBRECORD
       BEGIN DSSUBRECORD
          Name "RegDetalle"
-         Expression "TipoRegistro:RutCliente:DVCliente:NumTar:FechaTRX:HoraTRX:MontoTRX:Ciudad:Pais:TipoMov:DescripcionTRX:DescripcionTransac:Filler"
+         Expression "TipoRegistro:RutCliente:DVCliente:NumTar:FechaTRX:HoraTRX:MontoTRX:Ciudad:Pais:TipoMov:DescripcionTRX:DescripcionTransac:EstadoTransac:Filler"
          SqlType "12"
-         ParsedExpression "TipoRegistro : RutCliente : DVCliente : NumTar : FechaTRX : HoraTRX : MontoTRX : Ciudad : Pais : TipoMov : DescripcionTRX : DescripcionTransac : Filler"
-         StageVars "TipoRegistro;RutCliente;DVCliente;NumTar;FechaTRX;HoraTRX;MontoTRX;Ciudad;Pais;TipoMov;DescripcionTRX;DescripcionTransac;Filler"
+         ParsedExpression "TipoRegistro : RutCliente : DVCliente : NumTar : FechaTRX : HoraTRX : MontoTRX : Ciudad : Pais : TipoMov : DescripcionTRX : DescripcionTransac : EstadoTransac : Filler"
+         StageVars "TipoRegistro;RutCliente;DVCliente;NumTar;FechaTRX;HoraTRX;MontoTRX;Ciudad;Pais;TipoMov;DescripcionTRX;DescripcionTransac;EstadoTransac;Filler"
          Precision "228"
          ColScale "0"
          ExtendedPrecision "0"
@@ -60767,8 +60787,8 @@ record
          Name "QueueUpperSize"
          Value "0"
       END DSSUBRECORD
-      LeftTextPos "393"
-      TopTextPos "369"
+      LeftTextPos "385"
+      TopTextPos "360"
    END DSRECORD
    BEGIN DSRECORD
       Identifier "V0S32P5"
@@ -65133,8 +65153,8 @@ record
 )
 =+=+=+=
       END DSSUBRECORD
-      LeftTextPos "648"
-      TopTextPos "281"
+      LeftTextPos "613"
+      TopTextPos "258"
    END DSRECORD
    BEGIN DSRECORD
       Identifier "V0S44P6"
@@ -65404,7 +65424,7 @@ mainloop {
 	StageVar0_NomClie = (LnkT.NombreCliente + string_of_substring(InterVar0_8 , StageVar0_LNomClie));
 	StageVar0_LEmailClie = (90 - string_length(trimc_string(LnkT.PRD_CORREO_ELECTRONICO)));
 	StageVar0_EmailClie = (trimc_string(LnkT.PRD_CORREO_ELECTRONICO) + string_of_substring(InterVar0_8 , StageVar0_LEmailClie));
-	StageVar0_LIdPDF = (35 - string_length(LnkT.IdPdf));
+	StageVar0_LIdPDF = (36 - string_length(LnkT.IdPdf));
 	StageVar0_IdPDF = (LnkT.IdPdf + string_of_substring(InterVar0_8 , StageVar0_LIdPDF));
 	StageVar0_RegCabecera = ((((((((((StageVar0_TipoRegistro + StageVar0_RutCliente) + StageVar0_DVCliente) + StageVar0_NumTar) + StageVar0_TipoTar) + StageVar0_FechaTRX) + StageVar0_NomClie) + StageVar0_EmailClie) + LnkT.CLI_COLOR) + LnkT.CLI_BANCA) + StageVar0_IdPDF);
 	StageVar0_VarRegDetalle = substring_1(LnkT.RegDetalle , 1 , string_length(LnkT.RegDetalle));
@@ -65419,7 +65439,7 @@ mainloop {
 	StageVar0_CAvisos = ((StageVar0_CAvisos + InRowNumber0) - StageVar0_CRegistros);
 	StageVar0_VarCAvisos = substring_1(LnkT.RegistroControl , 34 , 10);
 	StageVar0_CSeqInterfaz = InterVar0_20;
-	StageVar0_CFiller = string_of_substring(InterVar0_8 , 183);
+	StageVar0_CFiller = string_of_substring(InterVar0_8 , 184);
 	StageVar0_RegControlFinal = ((((((StageVar0_CTipoRegistro + StageVar0_CToken) + StageVar0_CFechaGeneracion) + StageVar0_VarCRegistros) + StageVar0_VarCAvisos) + StageVar0_CSeqInterfaz) + StageVar0_CFiller);
 
 	// evaluate constraint and columns for link: Lnk_Cabecera
@@ -65669,9 +65689,9 @@ ELSE 'No Valido'
       END DSSUBRECORD
       BEGIN DSSUBRECORD
          Name "LIdPDF"
-         Expression "35-len(LnkT.IdPdf)"
+         Expression "36-len(LnkT.IdPdf)"
          SqlType "4"
-         ParsedExpression "35 - len(LnkT.IdPdf)"
+         ParsedExpression "36 - len(LnkT.IdPdf)"
          SourceColumn "LnkT.IdPdf"
          Precision "255"
          ColScale "0"
@@ -65796,9 +65816,9 @@ ELSE 'No Valido'
       END DSSUBRECORD
       BEGIN DSSUBRECORD
          Name "CFiller"
-         Expression "str(\" \",183)"
+         Expression "str(\" \",184)"
          SqlType "12"
-         ParsedExpression "str(\" \", 183)"
+         ParsedExpression "str(\" \", 184)"
          Precision "255"
          ColScale "0"
          ExtendedPrecision "0"
@@ -65946,8 +65966,8 @@ record
 =+=+=+=
       END DSSUBRECORD
       StageVars "EtapaVarCab"
-      LeftTextPos "963"
-      TopTextPos "360"
+      LeftTextPos "807"
+      TopTextPos "355"
    END DSRECORD
    BEGIN DSRECORD
       Identifier "V0S51P3"
@@ -66078,8 +66098,8 @@ record
 )
 =+=+=+=
       END DSSUBRECORD
-      LeftTextPos "894"
-      TopTextPos "360"
+      LeftTextPos "792"
+      TopTextPos "366"
    END DSRECORD
    BEGIN DSRECORD
       Identifier "V0S51P4"
@@ -66254,8 +66274,8 @@ record
 )
 =+=+=+=
       END DSSUBRECORD
-      LeftTextPos "916"
-      TopTextPos "348"
+      LeftTextPos "800"
+      TopTextPos "336"
    END DSRECORD
    BEGIN DSRECORD
       Identifier "V0S56"
@@ -66436,8 +66456,8 @@ record
          Name "QueueUpperSize"
          Value "0"
       END DSSUBRECORD
-      LeftTextPos "1104"
-      TopTextPos "388"
+      LeftTextPos "911"
+      TopTextPos "396"
    END DSRECORD
    BEGIN DSRECORD
       Identifier "V0S56P8"
@@ -66584,8 +66604,8 @@ record
          Name "QueueUpperSize"
          Value "0"
       END DSSUBRECORD
-      LeftTextPos "1168"
-      TopTextPos "403"
+      LeftTextPos "939"
+      TopTextPos "468"
    END DSRECORD
    BEGIN DSRECORD
       Identifier "V0S63"
@@ -67080,8 +67100,8 @@ record
          Name "QueueUpperSize"
          Value "0"
       END DSSUBRECORD
-      LeftTextPos "788"
-      TopTextPos "448"
+      LeftTextPos "707"
+      TopTextPos "427"
    END DSRECORD
    BEGIN DSRECORD
       Identifier "V0S63P5"
