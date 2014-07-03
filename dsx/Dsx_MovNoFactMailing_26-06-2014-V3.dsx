@@ -5,8 +5,8 @@ BEGIN HEADER
    ServerName "D48R"
    ToolInstanceID "BCHSGD"
    MDISVersion "1.0"
-   Date "2014-06-27"
-   Time "12.52.07"
+   Date "2014-07-03"
+   Time "17.38.23"
    ServerVersion "8.1"
 END HEADER
 BEGIN DSJOB
@@ -55397,8 +55397,8 @@ record
 END DSJOB
 BEGIN DSJOB
    Identifier "Job_10_Final"
-   DateModified "2014-06-27"
-   TimeModified "12.49.24"
+   DateModified "2014-07-03"
+   TimeModified "16.07.05"
    BEGIN DSRECORD
       Identifier "ROOT"
       OLEType "CJobDefn"
@@ -56008,14 +56008,14 @@ keep
       ZoomValue "100"
       StageXSize "48|48|48|48|48|48|47|48|48|48|48|48|48|48|48"
       StageYSize "48|48|48|48|48|48|48|48|48|48|48|48|48|48|48"
-      ContainerViewSizing "0028 0164 0829 0759 0000 0001 0208 0000"
+      ContainerViewSizing "0028 0164 0829 0759 0000 0001 0204 0000"
       StageNames "Seq_Arch_Final_XEROX|Trf_Join|SGD_Clientes_ds|Join_32|Trf_Traspaso|Trf_Clientes|Join_42|Trf_Filtro|Transformer_51|Funnel_56|Sort_59|Sort_63|Ds_RegTotales|Ds_INF_PROG1_CCA_EMAIL|Rm_Email_Dupp"
       StageTypeIDs "PxSequentialFile|CTransformerStage|PxDataSet|PxJoin|CTransformerStage|CTransformerStage|PxJoin|CTransformerStage|CTransformerStage|PxFunnel|PxSort|PxSort|PxDataSet|PxDataSet|PxRemDup"
       LinkNames " |Lnk_Tras_Join|Lnk_Clientes|Lnk_Trf|Lnk_Tras_Join|Lnk_Join|Lnk_sort|Lnk_Join|Lnk_Cabecera,Lnk_Detalle,Lnk_RefControl|Lnk_Sort|Lnk_Documento_Final|LnkT|Lnk_RegTotales|Lnk_Filtro_Email|DSLink124"
       LinkHasMetaDatas " |True|True|True|True|True|True|True|True,True,True|True|True|True|True|True|True"
       LinkTypes " |1|1|1|1|1|1|1|1,1,1|1|1|1|1|1|1"
-      LinkNamePositionXs " |544|339|385|242|337|650|613|807,792,800|911|939|707|80|742|611"
-      LinkNamePositionYs " |360|106|360|341|263|436|258|355,366,336|396|468|427|360|68|117"
+      LinkNamePositionXs " |544|339|385|242|337|650|613|815,798,779|911|939|707|80|742|611"
+      LinkNamePositionYs " |360|106|360|341|263|436|258|342,372,298|396|468|427|360|68|117"
       TargetStageIDs " |V0S42|V0S38|V0S26|V0S32|V0S32|V0S63|V0S42|V0S56,V0S56,V0S56|V0S59|V0S10|V0S51|V0S35|V0S123|V0S44"
       SourceStageEffectiveExecutionModes " |2|2|2|2|2|2|2|1,1,1|1|1|2|2|2|2"
       SourceStageRuntimeExecutionModes " |2|2|2|2|2|2|2|1,1,1|1|1|2|2|2|2"
@@ -56826,11 +56826,10 @@ mainloop {
 	//;
 	StageVar0_TipoRegistro = InterVar0_19;
 	InterVar0_20 = string_length(trimc_string(Lnk_Trf.RutCliente)) - 1;
-	StageVar0_LargoRut = (8 - string_length(substring_1(trimc_string(Lnk_Trf.RutCliente) , 1 , InterVar0_20)));
+	StageVar0_LargoRut = (9 - string_length(substring_1(trimc_string(Lnk_Trf.RutCliente) , 1 , InterVar0_20)));
 	InterVar0_20 = string_length(trimc_string(Lnk_Trf.RutCliente)) - 1;
 	StageVar0_RutCliente = (string_of_substring(InterVar0_21 , StageVar0_LargoRut) + trimc_string(substring_1(Lnk_Trf.RutCliente , 1 , InterVar0_20)));
-	InterVar0_20 = string_length(Lnk_Trf.RutCliente) - 1;
-	StageVar0_DVCliente = substring_1(Lnk_Trf.RutCliente , InterVar0_20 , 1);
+	StageVar0_DVCliente = substring_1(Lnk_Trf.RutCliente , string_length(Lnk_Trf.RutCliente) , 1);
 	StageVar0_LargoTar = (22 - string_length(trimc_string(Lnk_Trf.numeroTarjeta)));
 	StageVar0_NumTar = (trimc_string(Lnk_Trf.numeroTarjeta) + string_of_substring(InterVar0_22 , StageVar0_LargoTar));
 	StageVar0_FechaTRX = trimc_string(((substring_1(string_from_date(current_date()) , 9 , 2) + substring_1(string_from_date(current_date()) , 6 , 2)) + substring_1(string_from_date(current_date()) , 1 , 4)));
@@ -56870,14 +56869,14 @@ mainloop {
 		StageVar0_EstadoTransac = InterVar0_22;
 	}
 	//;
-	StageVar0_Filler = string_of_substring(InterVar0_22 , 26);
+	StageVar0_Filler = string_of_substring(InterVar0_22 , 25);
 	StageVar0_RegDetalle = (((((((((((((StageVar0_TipoRegistro + StageVar0_RutCliente) + StageVar0_DVCliente) + StageVar0_NumTar) + StageVar0_FechaTRX) + StageVar0_HoraTRX) + StageVar0_MontoTRX) + StageVar0_Ciudad) + StageVar0_Pais) + StageVar0_TipoMov) + StageVar0_DescripcionTRX) + StageVar0_DescripcionTransac) + StageVar0_EstadoTransac) + StageVar0_Filler);
 
 	// evaluate columns (no constraints) for link: Lnk_Tras_Join
 	Lnk_Tras_Join.TipoRegistro = InterVar0_30;
 	Lnk_Tras_Join.numeroTarjeta = Lnk_Trf.numeroTarjeta;
 	Lnk_Tras_Join.fechaConsulta = date_from_string(Lnk_Trf.fechaConsulta , InterVar0_31);
-	Lnk_Tras_Join.NombreCliente = Lnk_Trf.nombreTitular;
+	Lnk_Tras_Join.NombreCliente = ((((trimc_string(Lnk_Trf.nombreTitular) + InterVar0_22) + trimc_string(Lnk_Trf.apellidoPaternoTitular)) + InterVar0_22) + trimc_string(Lnk_Trf.apellidoMaternoTitular));
 	Lnk_Tras_Join.Email = InterVar0_32;
 	Lnk_Tras_Join.CLI_COLOR = StageVar0_COLOR;
 	Lnk_Tras_Join.CLI_BANCA = StageVar0_BANCA;
@@ -56948,9 +56947,9 @@ finish {
       END DSSUBRECORD
       BEGIN DSSUBRECORD
          Name "LargoRut"
-         Expression "8-LEN(trim(Lnk_Trf.RutCliente)[1,LEN(trim(Lnk_Trf.RutCliente))-1])"
+         Expression "9-LEN(trim(Lnk_Trf.RutCliente)[1,LEN(trim(Lnk_Trf.RutCliente))-1])"
          SqlType "4"
-         ParsedExpression "8 - LEN(trim(Lnk_Trf.RutCliente)[1, LEN(trim(Lnk_Trf.RutCliente)) - 1])"
+         ParsedExpression "9 - LEN(trim(Lnk_Trf.RutCliente)[1, LEN(trim(Lnk_Trf.RutCliente)) - 1])"
          SourceColumn "Lnk_Trf.RutCliente"
          Precision "0"
          ColScale "0"
@@ -56969,9 +56968,9 @@ finish {
       END DSSUBRECORD
       BEGIN DSSUBRECORD
          Name "DVCliente"
-         Expression "Lnk_Trf.RutCliente[len(Lnk_Trf.RutCliente)-1,1]"
+         Expression "Lnk_Trf.RutCliente[len(Lnk_Trf.RutCliente),1]"
          SqlType "12"
-         ParsedExpression "Lnk_Trf.RutCliente[len(Lnk_Trf.RutCliente) - 1, 1]"
+         ParsedExpression "Lnk_Trf.RutCliente[len(Lnk_Trf.RutCliente), 1]"
          SourceColumn "Lnk_Trf.RutCliente"
          Precision "1"
          ColScale "0"
@@ -57121,9 +57120,9 @@ finish {
       END DSSUBRECORD
       BEGIN DSSUBRECORD
          Name "Filler"
-         Expression "STR(\" \",26)"
+         Expression "STR(\" \",25)"
          SqlType "12"
-         ParsedExpression "STR(\" \", 26)"
+         ParsedExpression "STR(\" \", 25)"
          Precision "37"
          ColScale "0"
          ExtendedPrecision "0"
@@ -57402,10 +57401,10 @@ record
          Nullable "0"
          KeyPosition "0"
          DisplaySize "0"
-         Derivation "Lnk_Trf.nombreTitular"
+         Derivation "Trim(Lnk_Trf.nombreTitular):' ':Trim(Lnk_Trf.apellidoPaternoTitular):' ':Trim(Lnk_Trf.apellidoMaternoTitular)"
          Group "0"
-         ParsedDerivation "Lnk_Trf.nombreTitular"
-         SourceColumn "Lnk_Trf.nombreTitular"
+         ParsedDerivation "Trim(Lnk_Trf.nombreTitular) : ' ' : Trim(Lnk_Trf.apellidoPaternoTitular) : ' ' : Trim(Lnk_Trf.apellidoMaternoTitular)"
+         SourceColumn "Lnk_Trf.nombreTitular;Lnk_Trf.apellidoPaternoTitular;Lnk_Trf.apellidoMaternoTitular"
          SortKey "0"
          SortType "0"
          AllowCRLF "0"
@@ -65362,13 +65361,13 @@ mainloop {
 	int32 InterVar0_6;
 
 	// evaluate the stage variables first
-	if ((LnkT.numeroTarjeta != substring_1(StageVar0_RegCabecera , 11 , string_length(trimc_string(LnkT.numeroTarjeta))))) {
+	if ((LnkT.numeroTarjeta != substring_1(StageVar0_RegCabecera , 12 , string_length(trimc_string(LnkT.numeroTarjeta))))) {
 		StageVar0_EtapaVarCab = InterVar0_0;
 	} else {
 		StageVar0_EtapaVarCab = InterVar0_1;
 	}
 	//;
-	if ((LnkT.numeroTarjeta == substring_1(StageVar0_VarRegDetalle , 11 , string_length(trimc_string(LnkT.numeroTarjeta))))) {
+	if ((LnkT.numeroTarjeta == substring_1(StageVar0_VarRegDetalle , 12 , string_length(trimc_string(LnkT.numeroTarjeta))))) {
 		StageVar0_EtapaVarDet = InterVar0_0;
 	} else {
 		StageVar0_EtapaVarDet = InterVar0_1;
@@ -65385,7 +65384,7 @@ mainloop {
 	StageVar0_StageVar2 = (StageVar0_StageVar1 + InterVar0_4);
 	StageVar0_TipoRegistro = InterVar0_5;
 	InterVar0_6 = string_length(trimc_string(LnkT.RUT)) - 1;
-	StageVar0_LargoRut = (8 - string_length(substring_1(trimc_string(LnkT.RUT) , 1 , InterVar0_6)));
+	StageVar0_LargoRut = (9 - string_length(substring_1(trimc_string(LnkT.RUT) , 1 , InterVar0_6)));
 	InterVar0_6 = string_length(trimc_string(LnkT.RUT)) - 1;
 	StageVar0_RutCliente = (string_of_substring(InterVar0_7 , StageVar0_LargoRut) + trimc_string(substring_1(LnkT.RUT , 1 , InterVar0_6)));
 	StageVar0_DVCliente = substring_1(LnkT.RUT , string_length(LnkT.RUT) , 1);
@@ -65424,7 +65423,7 @@ mainloop {
 	StageVar0_NomClie = (LnkT.NombreCliente + string_of_substring(InterVar0_8 , StageVar0_LNomClie));
 	StageVar0_LEmailClie = (90 - string_length(trimc_string(LnkT.PRD_CORREO_ELECTRONICO)));
 	StageVar0_EmailClie = (trimc_string(LnkT.PRD_CORREO_ELECTRONICO) + string_of_substring(InterVar0_8 , StageVar0_LEmailClie));
-	StageVar0_LIdPDF = (36 - string_length(LnkT.IdPdf));
+	StageVar0_LIdPDF = (35 - string_length(LnkT.IdPdf));
 	StageVar0_IdPDF = (LnkT.IdPdf + string_of_substring(InterVar0_8 , StageVar0_LIdPDF));
 	StageVar0_RegCabecera = ((((((((((StageVar0_TipoRegistro + StageVar0_RutCliente) + StageVar0_DVCliente) + StageVar0_NumTar) + StageVar0_TipoTar) + StageVar0_FechaTRX) + StageVar0_NomClie) + StageVar0_EmailClie) + LnkT.CLI_COLOR) + LnkT.CLI_BANCA) + StageVar0_IdPDF);
 	StageVar0_VarRegDetalle = substring_1(LnkT.RegDetalle , 1 , string_length(LnkT.RegDetalle));
@@ -65496,9 +65495,9 @@ finish {
       StageVars "CStageVar"
       BEGIN DSSUBRECORD
          Name "EtapaVarCab"
-         Expression "IF LnkT.numeroTarjeta<> RegCabecera[11,len(trim(LnkT.numeroTarjeta))] Then 1 Else 0 "
+         Expression "IF LnkT.numeroTarjeta<> RegCabecera[12,len(trim(LnkT.numeroTarjeta))] Then 1 Else 0 "
          SqlType "12"
-         ParsedExpression " IF LnkT.numeroTarjeta <> RegCabecera[11, len(trim(LnkT.numeroTarjeta))] Then 1 Else 0"
+         ParsedExpression " IF LnkT.numeroTarjeta <> RegCabecera[12, len(trim(LnkT.numeroTarjeta))] Then 1 Else 0"
          SourceColumn "LnkT.numeroTarjeta"
          StageVars "RegCabecera"
          Precision "255"
@@ -65507,9 +65506,9 @@ finish {
       END DSSUBRECORD
       BEGIN DSSUBRECORD
          Name "EtapaVarDet"
-         Expression "IF LnkT.numeroTarjeta= VarRegDetalle[11,len(trim(LnkT.numeroTarjeta))] Then 1 Else 0 "
+         Expression "IF LnkT.numeroTarjeta= VarRegDetalle[12,len(trim(LnkT.numeroTarjeta))] Then 1 Else 0 "
          SqlType "12"
-         ParsedExpression " IF LnkT.numeroTarjeta = VarRegDetalle[11, len(trim(LnkT.numeroTarjeta))] Then 1 Else 0"
+         ParsedExpression " IF LnkT.numeroTarjeta = VarRegDetalle[12, len(trim(LnkT.numeroTarjeta))] Then 1 Else 0"
          SourceColumn "LnkT.numeroTarjeta"
          StageVars "VarRegDetalle"
          Precision "255"
@@ -65547,9 +65546,9 @@ finish {
       END DSSUBRECORD
       BEGIN DSSUBRECORD
          Name "LargoRut"
-         Expression "8-LEN(trim(LnkT.RUT)[1,LEN(trim(LnkT.RUT))-1])"
+         Expression "9-LEN(trim(LnkT.RUT)[1,LEN(trim(LnkT.RUT))-1])"
          SqlType "4"
-         ParsedExpression "8 - LEN(trim(LnkT.RUT)[1, LEN(trim(LnkT.RUT)) - 1])"
+         ParsedExpression "9 - LEN(trim(LnkT.RUT)[1, LEN(trim(LnkT.RUT)) - 1])"
          SourceColumn "LnkT.RUT"
          Precision "0"
          ColScale "0"
@@ -65689,9 +65688,9 @@ ELSE 'No Valido'
       END DSSUBRECORD
       BEGIN DSSUBRECORD
          Name "LIdPDF"
-         Expression "36-len(LnkT.IdPdf)"
+         Expression "35-len(LnkT.IdPdf)"
          SqlType "4"
-         ParsedExpression "36 - len(LnkT.IdPdf)"
+         ParsedExpression "35 - len(LnkT.IdPdf)"
          SourceColumn "LnkT.IdPdf"
          Precision "255"
          ColScale "0"
@@ -65966,8 +65965,8 @@ record
 =+=+=+=
       END DSSUBRECORD
       StageVars "EtapaVarCab"
-      LeftTextPos "807"
-      TopTextPos "355"
+      LeftTextPos "815"
+      TopTextPos "342"
    END DSRECORD
    BEGIN DSRECORD
       Identifier "V0S51P3"
@@ -66098,8 +66097,8 @@ record
 )
 =+=+=+=
       END DSSUBRECORD
-      LeftTextPos "792"
-      TopTextPos "366"
+      LeftTextPos "798"
+      TopTextPos "372"
    END DSRECORD
    BEGIN DSRECORD
       Identifier "V0S51P4"
@@ -66274,8 +66273,8 @@ record
 )
 =+=+=+=
       END DSSUBRECORD
-      LeftTextPos "800"
-      TopTextPos "336"
+      LeftTextPos "779"
+      TopTextPos "298"
    END DSRECORD
    BEGIN DSRECORD
       Identifier "V0S56"
