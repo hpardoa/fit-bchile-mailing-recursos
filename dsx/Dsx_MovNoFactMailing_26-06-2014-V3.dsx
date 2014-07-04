@@ -5,8 +5,8 @@ BEGIN HEADER
    ServerName "D48R"
    ToolInstanceID "BCHSGD"
    MDISVersion "1.0"
-   Date "2014-07-03"
-   Time "17.38.23"
+   Date "2014-07-04"
+   Time "11.23.17"
    ServerVersion "8.1"
 END HEADER
 BEGIN DSJOB
@@ -55397,8 +55397,8 @@ record
 END DSJOB
 BEGIN DSJOB
    Identifier "Job_10_Final"
-   DateModified "2014-07-03"
-   TimeModified "16.07.05"
+   DateModified "2014-07-04"
+   TimeModified "11.09.43"
    BEGIN DSRECORD
       Identifier "ROOT"
       OLEType "CJobDefn"
@@ -55584,6 +55584,7 @@ innerjoin
 1< [] 'Trf_Clientes:Lnk_Join.v'
 ## Outputs
 0> [modify (
+  CLI_BANCA:nullable string[max=30]=CLI_BANCA;
 keep
   RegistroControl,internalCode,fechaHoraInicioTrx,fechaHoraFinTrx,
   organizacion,numeroCuenta,apellidoPaternoTitular,apellidoMaternoTitular,
@@ -55608,7 +55609,7 @@ keep
   Cuerpoflag3,flag4,flag5,flag6,
   flag7,Cuerpostring1,Cuerpostring2,Cuerpostring3,
   string4,string5,string6,string7,
-  CLI_COLOR,CLI_BANCA,RutCliente;
+  CLI_COLOR,RutCliente;
 )] 'Join_32:Lnk_Trf.v'
 ;
 
@@ -56002,20 +56003,20 @@ keep
       StageXPos "996|453|312|310|192|312|591|589|723|887|885|657|24|743|589"
       StageYPos "444|333|24|336|334|168|332|192|331|332|444|443|336|39|37"
       StageTypes "CCustomStage|CTransformerStage|CCustomStage|CCustomStage|CTransformerStage|CTransformerStage|CCustomStage|CTransformerStage|CTransformerStage|CCustomStage|CCustomStage|CCustomStage|CCustomStage|CCustomStage|CCustomStage"
-      NextStageID "153"
+      NextStageID "161"
       SnapToGrid "2"
       GridLines "0"
       ZoomValue "100"
       StageXSize "48|48|48|48|48|48|47|48|48|48|48|48|48|48|48"
       StageYSize "48|48|48|48|48|48|48|48|48|48|48|48|48|48|48"
-      ContainerViewSizing "0028 0164 0829 0759 0000 0001 0204 0000"
+      ContainerViewSizing "0028 0164 0829 0759 0000 0001 0000 0000"
       StageNames "Seq_Arch_Final_XEROX|Trf_Join|SGD_Clientes_ds|Join_32|Trf_Traspaso|Trf_Clientes|Join_42|Trf_Filtro|Transformer_51|Funnel_56|Sort_59|Sort_63|Ds_RegTotales|Ds_INF_PROG1_CCA_EMAIL|Rm_Email_Dupp"
       StageTypeIDs "PxSequentialFile|CTransformerStage|PxDataSet|PxJoin|CTransformerStage|CTransformerStage|PxJoin|CTransformerStage|CTransformerStage|PxFunnel|PxSort|PxSort|PxDataSet|PxDataSet|PxRemDup"
       LinkNames " |Lnk_Tras_Join|Lnk_Clientes|Lnk_Trf|Lnk_Tras_Join|Lnk_Join|Lnk_sort|Lnk_Join|Lnk_Cabecera,Lnk_Detalle,Lnk_RefControl|Lnk_Sort|Lnk_Documento_Final|LnkT|Lnk_RegTotales|Lnk_Filtro_Email|DSLink124"
       LinkHasMetaDatas " |True|True|True|True|True|True|True|True,True,True|True|True|True|True|True|True"
       LinkTypes " |1|1|1|1|1|1|1|1,1,1|1|1|1|1|1|1"
       LinkNamePositionXs " |544|339|385|242|337|650|613|815,798,779|911|939|707|80|742|611"
-      LinkNamePositionYs " |360|106|360|341|263|436|258|342,372,298|396|468|427|360|68|117"
+      LinkNamePositionYs " |360|106|360|341|263|436|258|347,372,335|396|468|427|360|68|117"
       TargetStageIDs " |V0S42|V0S38|V0S26|V0S32|V0S32|V0S63|V0S42|V0S56,V0S56,V0S56|V0S59|V0S10|V0S51|V0S35|V0S123|V0S44"
       SourceStageEffectiveExecutionModes " |2|2|2|2|2|2|2|1,1,1|1|1|2|2|2|2"
       SourceStageRuntimeExecutionModes " |2|2|2|2|2|2|2|1,1,1|1|1|2|2|2|2"
@@ -56629,7 +56630,7 @@ keep
       OLEType "CTransformerStage"
       Readonly "0"
       Name "Trf_Join"
-      NextID "8"
+      NextID "9"
       InputPins "V0S26P1"
       OutputPins "V0S26P2"
       MetaBag "CMetaProperty"
@@ -56658,70 +56659,40 @@ initialize {
 
 	// declare our intermediate variables for this section
 	string InterVar0_0;
-	string InterVar0_1;
 	string InterVar0_2;
 	string InterVar0_3;
 	string InterVar0_4;
 	string InterVar0_5;
 	string InterVar0_6;
 	string InterVar0_7;
+	string InterVar0_8;
 	string InterVar0_9;
+	string InterVar0_10;
 	string InterVar0_11;
+	string InterVar0_12;
 	string InterVar0_13;
 	string InterVar0_14;
+	string InterVar0_15;
 	string InterVar0_16;
-	string InterVar0_17;
-	string InterVar0_19;
-	string InterVar0_21;
-	string InterVar0_22;
-	string InterVar0_23;
-	string InterVar0_24;
-	string InterVar0_25;
-	string InterVar0_26;
-	string InterVar0_27;
-	string InterVar0_28;
-	string InterVar0_29;
-	string InterVar0_30;
-	string InterVar0_31;
-	string InterVar0_32;
-	string InterVar0_33;
-	string InterVar0_34;
 
 	// initialise constant values which require conversion
-	InterVar0_0 = "Banco De Chile";
-	InterVar0_1 = 0;
-	InterVar0_2 = "Banco Edwards";
-	InterVar0_3 = 1;
-	InterVar0_4 = "Banco Credichil";
-	InterVar0_5 = 2;
-	InterVar0_6 = "No Valido";
-	InterVar0_7 = "Personas";
-	InterVar0_9 = "Empresas";
-	InterVar0_11 = "Corporativa";
-	InterVar0_13 = "Preferencial";
-	InterVar0_14 = 3;
-	InterVar0_16 = "Privada";
-	InterVar0_17 = 4;
-	InterVar0_19 = "D";
-	InterVar0_21 = "0";
-	InterVar0_22 = " ";
-	InterVar0_23 = ":";
-	InterVar0_24 = "";
-	InterVar0_25 = "CL";
-	InterVar0_26 = "N";
-	InterVar0_27 = "  ";
-	InterVar0_28 = "I";
-	InterVar0_29 = "*";
-	InterVar0_30 = "C";
-	InterVar0_31 = "%yyyy-%mm-%dd";
-	InterVar0_32 = "F";
-	InterVar0_33 = "Mov_NoFact";
-	InterVar0_34 = "00001";
+	InterVar0_0 = "D";
+	InterVar0_2 = "0";
+	InterVar0_3 = " ";
+	InterVar0_4 = ":";
+	InterVar0_5 = "";
+	InterVar0_6 = "CL";
+	InterVar0_7 = "N";
+	InterVar0_8 = "  ";
+	InterVar0_9 = "I";
+	InterVar0_10 = 1;
+	InterVar0_11 = "*";
+	InterVar0_12 = "C";
+	InterVar0_13 = "%yyyy-%mm-%dd";
+	InterVar0_14 = "F";
+	InterVar0_15 = "Mov_NoFact";
+	InterVar0_16 = "00001";
 	// Stage variable declaration and initialisation
-	string StageVar0_COLOR;
-	StageVar0_COLOR = "";
-	string StageVar0_BANCA;
-	StageVar0_BANCA = "";
 	string StageVar0_TipoRegistro;
 	StageVar0_TipoRegistro = "";
 	int32 StageVar0_LargoRut;
@@ -56769,119 +56740,68 @@ mainloop {
 	RowRejected0 = 1;
 
 	// declare our intermediate variables for this section
-	string InterVar0_8;
-	string InterVar0_10;
-	string InterVar0_12;
-	string InterVar0_15;
-	string InterVar0_18;
-	int32 InterVar0_20;
+	int32 InterVar0_1;
+	string InterVar0_17;
 
 	// evaluate the stage variables first
-	if ((Lnk_Trf.CLI_COLOR == InterVar0_0)) {
-		StageVar0_COLOR = InterVar0_1;
-	} else {
-		if ((Lnk_Trf.CLI_COLOR == InterVar0_2)) {
-			StageVar0_COLOR = InterVar0_3;
-		} else {
-			if ((Lnk_Trf.CLI_COLOR == InterVar0_4)) {
-				StageVar0_COLOR = InterVar0_5;
-			} else {
-				StageVar0_COLOR = InterVar0_6;
-			}
-			//;
-		}
-		//;
-	}
-	//;
-	if ((Lnk_Trf.CLI_BANCA == InterVar0_7)) {
-		InterVar0_8 = Lnk_Trf.CLI_BANCA == InterVar0_1;
-		StageVar0_BANCA = InterVar0_8;
-	} else {
-		if ((Lnk_Trf.CLI_BANCA == InterVar0_9)) {
-			InterVar0_10 = Lnk_Trf.CLI_BANCA == InterVar0_3;
-			StageVar0_BANCA = InterVar0_10;
-		} else {
-			if ((Lnk_Trf.CLI_BANCA == InterVar0_11)) {
-				InterVar0_12 = Lnk_Trf.CLI_BANCA == InterVar0_5;
-				StageVar0_BANCA = InterVar0_12;
-			} else {
-				if ((Lnk_Trf.CLI_BANCA == InterVar0_13)) {
-					InterVar0_15 = Lnk_Trf.CLI_BANCA == InterVar0_14;
-					StageVar0_BANCA = InterVar0_15;
-				} else {
-					if ((Lnk_Trf.CLI_BANCA == InterVar0_16)) {
-						InterVar0_18 = Lnk_Trf.CLI_BANCA == InterVar0_17;
-						StageVar0_BANCA = InterVar0_18;
-					} else {
-						StageVar0_BANCA = InterVar0_6;
-					}
-					//;
-				}
-				//;
-			}
-			//;
-		}
-		//;
-	}
-	//;
-	StageVar0_TipoRegistro = InterVar0_19;
-	InterVar0_20 = string_length(trimc_string(Lnk_Trf.RutCliente)) - 1;
-	StageVar0_LargoRut = (9 - string_length(substring_1(trimc_string(Lnk_Trf.RutCliente) , 1 , InterVar0_20)));
-	InterVar0_20 = string_length(trimc_string(Lnk_Trf.RutCliente)) - 1;
-	StageVar0_RutCliente = (string_of_substring(InterVar0_21 , StageVar0_LargoRut) + trimc_string(substring_1(Lnk_Trf.RutCliente , 1 , InterVar0_20)));
+	StageVar0_TipoRegistro = InterVar0_0;
+	InterVar0_1 = string_length(trimc_string(Lnk_Trf.RutCliente)) - 1;
+	StageVar0_LargoRut = (9 - string_length(substring_1(trimc_string(Lnk_Trf.RutCliente) , 1 , InterVar0_1)));
+	InterVar0_1 = string_length(trimc_string(Lnk_Trf.RutCliente)) - 1;
+	StageVar0_RutCliente = (string_of_substring(InterVar0_2 , StageVar0_LargoRut) + trimc_string(substring_1(Lnk_Trf.RutCliente , 1 , InterVar0_1)));
 	StageVar0_DVCliente = substring_1(Lnk_Trf.RutCliente , string_length(Lnk_Trf.RutCliente) , 1);
 	StageVar0_LargoTar = (22 - string_length(trimc_string(Lnk_Trf.numeroTarjeta)));
-	StageVar0_NumTar = (trimc_string(Lnk_Trf.numeroTarjeta) + string_of_substring(InterVar0_22 , StageVar0_LargoTar));
+	StageVar0_NumTar = (trimc_string(Lnk_Trf.numeroTarjeta) + string_of_substring(InterVar0_3 , StageVar0_LargoTar));
 	StageVar0_FechaTRX = trimc_string(((substring_1(string_from_date(current_date()) , 9 , 2) + substring_1(string_from_date(current_date()) , 6 , 2)) + substring_1(string_from_date(current_date()) , 1 , 4)));
-	StageVar0_HoraTRX = trimc_string(((substring_1(string_from_timestamp(current_timestamp()) , 12 , 2) + InterVar0_23) + substring_1(string_from_timestamp(current_timestamp()) , 15 , 2)));
+	StageVar0_HoraTRX = trimc_string(((substring_1(string_from_timestamp(current_timestamp()) , 12 , 2) + InterVar0_4) + substring_1(string_from_timestamp(current_timestamp()) , 15 , 2)));
 	StageVar0_MontoVal = (15 - string_length(trimc_string(Lnk_Trf.montoCompra)));
-	StageVar0_MontoTRX = (trimc_string(Lnk_Trf.montoCompra) + string_of_substring(InterVar0_22 , StageVar0_MontoVal));
+	StageVar0_MontoTRX = (trimc_string(Lnk_Trf.montoCompra) + string_of_substring(InterVar0_3 , StageVar0_MontoVal));
 	StageVar0_ValCiudad = (50 - string_length(Lnk_Trf.ciudad));
-	StageVar0_Ciudad = (Lnk_Trf.ciudad + string_of_substring(InterVar0_22 , StageVar0_ValCiudad));
-	if ((trimc_string(Lnk_Trf.codigoPaisComercio) == InterVar0_24)) {
-		StageVar0_Pais = string_of_substring(InterVar0_22 , 30);
+	StageVar0_Ciudad = (Lnk_Trf.ciudad + string_of_substring(InterVar0_3 , StageVar0_ValCiudad));
+	if ((trimc_string(Lnk_Trf.codigoPaisComercio) == InterVar0_5)) {
+		StageVar0_Pais = string_of_substring(InterVar0_3 , 30);
 	} else {
-		StageVar0_Pais = (trimc_string(Lnk_Trf.codigoPaisComercio) + string_of_substring(InterVar0_22 , 28));
+		StageVar0_Pais = (trimc_string(Lnk_Trf.codigoPaisComercio) + string_of_substring(InterVar0_3 , 28));
 	}
 	//;
-	if ((substring_1(StageVar0_Pais , 1 , 2) == InterVar0_25)) {
-		StageVar0_TipoMov = InterVar0_26;
+	if ((substring_1(StageVar0_Pais , 1 , 2) == InterVar0_6)) {
+		StageVar0_TipoMov = InterVar0_7;
 	} else {
-		if ((substring_1(StageVar0_Pais , 1 , 2) == InterVar0_27)) {
-			StageVar0_TipoMov = InterVar0_26;
+		if ((substring_1(StageVar0_Pais , 1 , 2) == InterVar0_8)) {
+			StageVar0_TipoMov = InterVar0_7;
 		} else {
-			StageVar0_TipoMov = InterVar0_28;
+			StageVar0_TipoMov = InterVar0_9;
 		}
 		//;
 	}
 	//;
 	StageVar0_ValDescripcion = (50 - string_length(trimc_string(Lnk_Trf.glosaTransaccion)));
-	StageVar0_DescripcionTRX = (trimc_string(Lnk_Trf.glosaTransaccion) + string_of_substring(InterVar0_22 , StageVar0_ValDescripcion));
-	if ((trimc_string(Lnk_Trf.descripcionTransaccion) == InterVar0_24)) {
-		StageVar0_DescripcionTransac = string_of_substring(InterVar0_22 , 10);
+	StageVar0_DescripcionTRX = (trimc_string(Lnk_Trf.glosaTransaccion) + string_of_substring(InterVar0_3 , StageVar0_ValDescripcion));
+	if ((trimc_string(Lnk_Trf.descripcionTransaccion) == InterVar0_5)) {
+		StageVar0_DescripcionTransac = string_of_substring(InterVar0_3 , 10);
 	} else {
 		StageVar0_DescripcionTransac = substring_1(Lnk_Trf.descripcionTransaccion , 1 , 10);
 	}
 	//;
-	if ((trimc_string(Lnk_Trf.estadoTransaccion) == InterVar0_3)) {
-		StageVar0_EstadoTransac = InterVar0_29;
+	if ((trimc_string(Lnk_Trf.estadoTransaccion) == InterVar0_10)) {
+		StageVar0_EstadoTransac = InterVar0_11;
 	} else {
-		StageVar0_EstadoTransac = InterVar0_22;
+		StageVar0_EstadoTransac = InterVar0_3;
 	}
 	//;
-	StageVar0_Filler = string_of_substring(InterVar0_22 , 25);
+	StageVar0_Filler = string_of_substring(InterVar0_3 , 25);
 	StageVar0_RegDetalle = (((((((((((((StageVar0_TipoRegistro + StageVar0_RutCliente) + StageVar0_DVCliente) + StageVar0_NumTar) + StageVar0_FechaTRX) + StageVar0_HoraTRX) + StageVar0_MontoTRX) + StageVar0_Ciudad) + StageVar0_Pais) + StageVar0_TipoMov) + StageVar0_DescripcionTRX) + StageVar0_DescripcionTransac) + StageVar0_EstadoTransac) + StageVar0_Filler);
 
 	// evaluate columns (no constraints) for link: Lnk_Tras_Join
-	Lnk_Tras_Join.TipoRegistro = InterVar0_30;
+	Lnk_Tras_Join.TipoRegistro = InterVar0_12;
 	Lnk_Tras_Join.numeroTarjeta = Lnk_Trf.numeroTarjeta;
-	Lnk_Tras_Join.fechaConsulta = date_from_string(Lnk_Trf.fechaConsulta , InterVar0_31);
-	Lnk_Tras_Join.NombreCliente = ((((trimc_string(Lnk_Trf.nombreTitular) + InterVar0_22) + trimc_string(Lnk_Trf.apellidoPaternoTitular)) + InterVar0_22) + trimc_string(Lnk_Trf.apellidoMaternoTitular));
-	Lnk_Tras_Join.Email = InterVar0_32;
-	Lnk_Tras_Join.CLI_COLOR = StageVar0_COLOR;
-	Lnk_Tras_Join.CLI_BANCA = StageVar0_BANCA;
-	InterVar0_8 = (RowCount0_0 + 1);
-	Lnk_Tras_Join.IdPdf = ((((InterVar0_33 + string_from_date(current_date())) + substring_1(Lnk_Trf.nombreTitular , 1 , 2)) + InterVar0_34) + InterVar0_8);
+	Lnk_Tras_Join.fechaConsulta = date_from_string(Lnk_Trf.fechaConsulta , InterVar0_13);
+	Lnk_Tras_Join.NombreCliente = ((((trimc_string(Lnk_Trf.nombreTitular) + InterVar0_3) + trimc_string(Lnk_Trf.apellidoPaternoTitular)) + InterVar0_3) + trimc_string(Lnk_Trf.apellidoMaternoTitular));
+	Lnk_Tras_Join.Email = InterVar0_14;
+	Lnk_Tras_Join.CLI_COLOR = Lnk_Trf.CLI_COLOR;
+	Lnk_Tras_Join.CLI_BANCA = Lnk_Trf.CLI_BANCA;
+	InterVar0_17 = (RowCount0_0 + 1);
+	Lnk_Tras_Join.IdPdf = ((((InterVar0_15 + string_from_date(current_date())) + substring_1(Lnk_Trf.nombreTitular , 1 , 2)) + InterVar0_16) + InterVar0_17);
 	Lnk_Tras_Join.RUT = Lnk_Trf.RutCliente;
 	Lnk_Tras_Join.RegDetalle = StageVar0_RegDetalle;
 	Lnk_Tras_Join.DVCliente = StageVar0_DVCliente;
@@ -56916,26 +56836,6 @@ finish {
       BlockSize "0"
       SKKeySourceType "file"
       StageVars "CStageVar"
-      BEGIN DSSUBRECORD
-         Name "COLOR"
-         Expression "IF Lnk_Trf.CLI_COLOR ='Banco De Chile'  then 0 else IF Lnk_Trf.CLI_COLOR='Banco Edwards' THEN 1 ELSE IF Lnk_Trf.CLI_COLOR='Banco Credichil' THEN 2 ELSE 'No Valido'"
-         SqlType "12"
-         ParsedExpression " IF Lnk_Trf.CLI_COLOR = 'Banco De Chile' then 0 else  IF Lnk_Trf.CLI_COLOR = 'Banco Edwards' THEN 1 ELSE  IF Lnk_Trf.CLI_COLOR = 'Banco Credichil' THEN 2 ELSE 'No Valido'"
-         SourceColumn "Lnk_Trf.CLI_COLOR"
-         Precision "255"
-         ColScale "0"
-         ExtendedPrecision "0"
-      END DSSUBRECORD
-      BEGIN DSSUBRECORD
-         Name "BANCA"
-         Expression "IF Lnk_Trf.CLI_BANCA='Personas' THEN Lnk_Trf.CLI_BANCA=0 ELSE IF Lnk_Trf.CLI_BANCA='Empresas' THEN Lnk_Trf.CLI_BANCA=1 ELSE IF Lnk_Trf.CLI_BANCA='Corporativa' THEN Lnk_Trf.CLI_BANCA=2 ELSE IF Lnk_Trf.CLI_BANCA='Preferencial' THEN Lnk_Trf.CLI_BANCA =3 ELSE IF Lnk_Trf.CLI_BANCA='Privada' THEN Lnk_Trf.CLI_BANCA=4 Else 'No Valido'"
-         SqlType "12"
-         ParsedExpression " IF Lnk_Trf.CLI_BANCA = 'Personas' THEN Lnk_Trf.CLI_BANCA = 0 ELSE  IF Lnk_Trf.CLI_BANCA = 'Empresas' THEN Lnk_Trf.CLI_BANCA = 1 ELSE  IF Lnk_Trf.CLI_BANCA = 'Corporativa' THEN Lnk_Trf.CLI_BANCA = 2 ELSE  IF Lnk_Trf.CLI_BANCA = 'Preferencial' THEN Lnk_Trf.CLI_BANCA = 3 ELSE  IF Lnk_Trf.CLI_BANCA = 'Privada' THEN Lnk_Trf.CLI_BANCA = 4 Else 'No Valido'"
-         SourceColumn "Lnk_Trf.CLI_BANCA"
-         Precision "255"
-         ColScale "0"
-         ExtendedPrecision "0"
-      END DSSUBRECORD
       BEGIN DSSUBRECORD
          Name "TipoRegistro"
          Expression "'D'"
@@ -57459,9 +57359,10 @@ record
          Nullable "1"
          KeyPosition "0"
          DisplaySize "15"
-         Derivation "COLOR"
+         Derivation "Lnk_Trf.CLI_COLOR"
          Group "0"
-         ParsedDerivation "COLOR"
+         ParsedDerivation "Lnk_Trf.CLI_COLOR"
+         SourceColumn "Lnk_Trf.CLI_COLOR"
          SortKey "0"
          SortType "0"
          TableDef "Saved\\LNK_DB2_Clientes\\Tabla_Clientes"
@@ -57471,7 +57372,6 @@ record
          PadNulls "0"
          SignOption "0"
          SortingOrder "0"
-         StageVars "COLOR"
          ArrayHandling "0"
          SyncIndicator "0"
          PadChar ""
@@ -57491,9 +57391,10 @@ record
          Nullable "1"
          KeyPosition "0"
          DisplaySize "30"
-         Derivation "BANCA"
+         Derivation "Lnk_Trf.CLI_BANCA"
          Group "0"
-         ParsedDerivation "BANCA"
+         ParsedDerivation "Lnk_Trf.CLI_BANCA"
+         SourceColumn "Lnk_Trf.CLI_BANCA"
          SortKey "0"
          SortType "0"
          TableDef "Saved\\LNK_DB2_Clientes\\Tabla_Clientes"
@@ -57503,7 +57404,6 @@ record
          PadNulls "0"
          SignOption "0"
          SortingOrder "0"
-         StageVars "BANCA"
          ArrayHandling "0"
          SyncIndicator "0"
          PadChar ""
@@ -64197,28 +64097,197 @@ inputname 0 Lnk_Clientes;
 outputname 0 Lnk_Join;
 
 initialize {
-	// define our row rejected variable
-	int8 RowRejected0;
+\(9)// define our row rejected variable
+\(9)int8 RowRejected0;
 
-	// define our null set variable
-	int8 NullSetVar0;
+\(9)// define our null set variable
+\(9)int8 NullSetVar0;
 
-	// Stage variable declaration and initialisation
-	string StageVar0_ValRut;
-	StageVar0_ValRut = "";
+\(9)// declare our intermediate variables for this section
+\(9)string InterVar0_0;
+\(9)string InterVar0_1;
+\(9)string InterVar0_2;
+\(9)string InterVar0_3;
+\(9)string InterVar0_4;
+\(9)string InterVar0_5;
+\(9)string InterVar0_6;
+\(9)string InterVar0_7;
+\(9)string InterVar0_8;
+\(9)string InterVar0_9;
+\(9)string InterVar0_10;
+\(9)string InterVar0_11;
+\(9)string InterVar0_12;
+\(9)string InterVar0_13;
+\(9)string InterVar0_14;
+\(9)string InterVar0_15;
+\(9)string InterVar0_16;
+\(9)string InterVar0_17;
+\(9)string InterVar0_18;
+\(9)string InterVar0_19;
+\(9)string InterVar0_20;
+\(9)string InterVar0_21;
+\(9)string InterVar0_22;
+\(9)string InterVar0_23;
+\(9)string InterVar0_24;
+\(9)string InterVar0_25;
+
+\(9)// initialise constant values which require conversion
+\(9)InterVar0_0 = \"BANCO EDWARDS\";
+\(9)InterVar0_1 = \"1\";
+\(9)InterVar0_2 = \"BANCO CITI\";
+\(9)InterVar0_3 = \"BANCO CREDICHILE\";
+\(9)InterVar0_4 = \"2\";
+\(9)InterVar0_5 = \"0\";
+\(9)InterVar0_6 = \"INMOBILIARIA Y CONSTRUCCION\";
+\(9)InterVar0_7 = \"EMPRESAS A\";
+\(9)InterVar0_8 = \"EMPRESAS B\";
+\(9)InterVar0_9 = \"GRANDES EMPRESAS\";
+\(9)InterVar0_10 = \"EMPRESAS\";
+\(9)InterVar0_11 = \"MEDIANAS EMPRESAS\";
+\(9)InterVar0_12 = \"MASIVO EMPRESAS\";
+\(9)InterVar0_13 = \"MICRO EMPRESAS\";
+\(9)InterVar0_14 = \"PEQUENAS EMPRESAS\";
+\(9)InterVar0_15 = \"PEQUEÑAS EMPRESAS\";
+\(9)InterVar0_16 = \"GGEE\";
+\(9)InterVar0_17 = \"MAYORISTAS\";
+\(9)InterVar0_18 = \"MULTINACIONALES\";
+\(9)InterVar0_19 = \"CORPORATIVA\";
+\(9)InterVar0_20 = \"CORPORACIONES\";
+\(9)InterVar0_21 = \"PREFERENCIAL\";
+\(9)InterVar0_22 = \"3\";
+\(9)InterVar0_23 = \"PRIVADO\";
+\(9)InterVar0_24 = \"4\";
+\(9)InterVar0_25 = \"EXCLUSIVO\";
+\(9)// Stage variable declaration and initialisation
+\(9)string StageVar0_vOrigenCuenta;
+\(9)StageVar0_vOrigenCuenta = \"\";
+\(9)string StageVar0_vOrigenCta;
+\(9)StageVar0_vOrigenCta = \"\";
+\(9)string StageVar0_ValRut;
+\(9)StageVar0_ValRut = \"\";
+\(9)string StageVar0_vTipoBanca;
+\(9)StageVar0_vTipoBanca = \"\";
+\(9)string StageVar0_vTipoBancaIF;
+\(9)StageVar0_vTipoBancaIF = \"\";
 }
 
 mainloop {
-	// initialise our row rejected variable
-	RowRejected0 = 1;
+\(9)// initialise our row rejected variable
+\(9)RowRejected0 = 1;
 
-	// evaluate the stage variables first
-	StageVar0_ValRut = trimc_string((Lnk_Clientes.CLI_RUT + Lnk_Clientes.CLI_RUT_DV));
+\(9)// evaluate the stage variables first
+\(9)StageVar0_vOrigenCuenta = upper_case(trimc_string(Lnk_Clientes.CLI_MARCA));
+\(9)if ((StageVar0_vOrigenCuenta == InterVar0_0)) {
+\(9)\(9)StageVar0_vOrigenCta = InterVar0_1;
+\(9)} else {
+\(9)\(9)if ((StageVar0_vOrigenCuenta == InterVar0_2)) {
+\(9)\(9)\(9)StageVar0_vOrigenCta = InterVar0_1;
+\(9)\(9)} else {
+\(9)\(9)\(9)if ((StageVar0_vOrigenCuenta == InterVar0_3)) {
+\(9)\(9)\(9)\(9)StageVar0_vOrigenCta = InterVar0_4;
+\(9)\(9)\(9)} else {
+\(9)\(9)\(9)\(9)StageVar0_vOrigenCta = InterVar0_5;
+\(9)\(9)\(9)}
+\(9)\(9)\(9)//;
+\(9)\(9)}
+\(9)\(9)//;
+\(9)}
+\(9)//;
+\(9)StageVar0_ValRut = trimc_string((Lnk_Clientes.CLI_RUT + Lnk_Clientes.CLI_RUT_DV));
+\(9)StageVar0_vTipoBanca = upper_case(trimc_string(Lnk_Clientes.CLI_SEGMENTO));
+\(9)if ((StageVar0_vTipoBanca == InterVar0_6)) {
+\(9)\(9)StageVar0_vTipoBancaIF = InterVar0_1;
+\(9)} else {
+\(9)\(9)if ((StageVar0_vTipoBanca == InterVar0_7)) {
+\(9)\(9)\(9)StageVar0_vTipoBancaIF = InterVar0_1;
+\(9)\(9)} else {
+\(9)\(9)\(9)if ((StageVar0_vTipoBanca == InterVar0_8)) {
+\(9)\(9)\(9)\(9)StageVar0_vTipoBancaIF = InterVar0_1;
+\(9)\(9)\(9)} else {
+\(9)\(9)\(9)\(9)if ((StageVar0_vTipoBanca == InterVar0_9)) {
+\(9)\(9)\(9)\(9)\(9)StageVar0_vTipoBancaIF = InterVar0_1;
+\(9)\(9)\(9)\(9)} else {
+\(9)\(9)\(9)\(9)\(9)if ((StageVar0_vTipoBanca == InterVar0_10)) {
+\(9)\(9)\(9)\(9)\(9)\(9)StageVar0_vTipoBancaIF = InterVar0_1;
+\(9)\(9)\(9)\(9)\(9)} else {
+\(9)\(9)\(9)\(9)\(9)\(9)if ((StageVar0_vTipoBanca == InterVar0_11)) {
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)StageVar0_vTipoBancaIF = InterVar0_1;
+\(9)\(9)\(9)\(9)\(9)\(9)} else {
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)if ((StageVar0_vTipoBanca == InterVar0_12)) {
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)StageVar0_vTipoBancaIF = InterVar0_1;
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)} else {
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)if ((StageVar0_vTipoBanca == InterVar0_13)) {
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)StageVar0_vTipoBancaIF = InterVar0_1;
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)} else {
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)if (((StageVar0_vTipoBanca == InterVar0_14) || (StageVar0_vTipoBanca == InterVar0_15))) {
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)StageVar0_vTipoBancaIF = InterVar0_1;
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)} else {
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)if ((StageVar0_vTipoBanca == InterVar0_16)) {
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)StageVar0_vTipoBancaIF = InterVar0_1;
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)} else {
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)if ((StageVar0_vTipoBanca == InterVar0_17)) {
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)StageVar0_vTipoBancaIF = InterVar0_1;
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)} else {
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)if ((StageVar0_vTipoBanca == InterVar0_18)) {
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)StageVar0_vTipoBancaIF = InterVar0_1;
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)} else {
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)if ((StageVar0_vTipoBanca == InterVar0_19)) {
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)StageVar0_vTipoBancaIF = InterVar0_4;
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)} else {
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)if ((StageVar0_vTipoBanca == InterVar0_20)) {
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)StageVar0_vTipoBancaIF = InterVar0_4;
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)} else {
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)if ((StageVar0_vTipoBanca == InterVar0_21)) {
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)StageVar0_vTipoBancaIF = InterVar0_22;
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)} else {
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)if ((StageVar0_vTipoBanca == InterVar0_23)) {
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)StageVar0_vTipoBancaIF = InterVar0_24;
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)} else {
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)if ((StageVar0_vTipoBanca == InterVar0_25)) {
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)StageVar0_vTipoBancaIF = InterVar0_24;
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)} else {
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)StageVar0_vTipoBancaIF = InterVar0_5;
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)}
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)//;
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)}
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)//;
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)}
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)//;
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)}
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)//;
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)}
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)//;
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)}
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)//;
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)}
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)//;
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)}
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)//;
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)}
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)//;
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)}
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)\(9)//;
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)}
+\(9)\(9)\(9)\(9)\(9)\(9)\(9)//;
+\(9)\(9)\(9)\(9)\(9)\(9)}
+\(9)\(9)\(9)\(9)\(9)\(9)//;
+\(9)\(9)\(9)\(9)\(9)}
+\(9)\(9)\(9)\(9)\(9)//;
+\(9)\(9)\(9)\(9)}
+\(9)\(9)\(9)\(9)//;
+\(9)\(9)\(9)}
+\(9)\(9)\(9)//;
+\(9)\(9)}
+\(9)\(9)//;
+\(9)}
+\(9)//;
 
-	// evaluate columns (no constraints) for link: Lnk_Join
-	Lnk_Join.RutCliente = StageVar0_ValRut;
-	writerecord 0;
-	RowRejected0 = 0;
+\(9)// evaluate columns (no constraints) for link: Lnk_Join
+\(9)Lnk_Join.RutCliente = StageVar0_ValRut;
+\(9)Lnk_Join.CLI_COLOR = StageVar0_vOrigenCta;
+\(9)Lnk_Join.CLI_BANCA = StageVar0_vTipoBancaIF;
+\(9)writerecord 0;
+\(9)RowRejected0 = 0;
 }
 
 finish {
@@ -64237,11 +64306,106 @@ finish {
       SKKeySourceType "file"
       StageVars "CStageVar"
       BEGIN DSSUBRECORD
+         Name "vOrigenCuenta"
+         Expression "UPCASE(TRIM(Lnk_Clientes.CLI_MARCA))"
+         SqlType "12"
+         ParsedExpression "UPCASE(TRIM(Lnk_Clientes.CLI_MARCA))"
+         SourceColumn "Lnk_Clientes.CLI_MARCA"
+         Precision "255"
+         ColScale "0"
+         ExtendedPrecision "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "vOrigenCta"
+         Expression =+=+=+=
+IF (vOrigenCuenta = 'BANCO EDWARDS') THEN
+
+"1"
+
+ELSE IF (vOrigenCuenta = 'BANCO CITI') THEN
+
+"1"
+
+ELSE IF (vOrigenCuenta = 'BANCO CREDICHILE') THEN
+
+"2"
+
+ELSE
+
+"0"
+
+=+=+=+=
+         SqlType "12"
+         ParsedExpression " IF (vOrigenCuenta = 'BANCO EDWARDS') THEN \"1\" ELSE  IF (vOrigenCuenta = 'BANCO CITI') THEN \"1\" ELSE  IF (vOrigenCuenta = 'BANCO CREDICHILE') THEN \"2\" ELSE \"0\""
+         StageVars "vOrigenCuenta"
+         Precision "255"
+         ColScale "0"
+         ExtendedPrecision "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
          Name "ValRut"
          Expression "trim(Lnk_Clientes.CLI_RUT:Lnk_Clientes.CLI_RUT_DV)"
          SqlType "12"
          ParsedExpression "trim(Lnk_Clientes.CLI_RUT : Lnk_Clientes.CLI_RUT_DV)"
          SourceColumn "Lnk_Clientes.CLI_RUT;Lnk_Clientes.CLI_RUT_DV"
+         Precision "255"
+         ColScale "0"
+         ExtendedPrecision "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "vTipoBanca"
+         Expression "UPCASE(TRIM(Lnk_Clientes.CLI_SEGMENTO))"
+         SqlType "12"
+         ParsedExpression "UPCASE(TRIM(Lnk_Clientes.CLI_SEGMENTO))"
+         SourceColumn "Lnk_Clientes.CLI_SEGMENTO"
+         Precision "255"
+         ColScale "0"
+         ExtendedPrecision "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "vTipoBancaIF"
+         Expression =+=+=+=
+IF (vTipoBanca = 'INMOBILIARIA Y CONSTRUCCION') THEN   
+\"1\"
+ELSE IF (vTipoBanca = 'EMPRESAS A') THEN
+\"1\"
+ELSE IF (vTipoBanca = 'EMPRESAS B') THEN
+\"1\"
+ELSE IF (vTipoBanca = 'GRANDES EMPRESAS') THEN
+\"1\"
+ELSE IF (vTipoBanca = 'EMPRESAS') THEN
+\"1\"
+ELSE IF (vTipoBanca = 'MEDIANAS EMPRESAS') THEN
+\"1\"
+ELSE IF (vTipoBanca = 'MASIVO EMPRESAS') THEN
+\"1\"
+ELSE IF (vTipoBanca = 'MICRO EMPRESAS') THEN
+\"1\"
+ELSE IF (vTipoBanca = 'PEQUENAS EMPRESAS') OR (vTipoBanca = 'PEQUEÑAS EMPRESAS')THEN
+\"1\"
+ELSE IF (vTipoBanca = 'GGEE') THEN
+\"1\"
+ELSE IF (vTipoBanca = 'MAYORISTAS') THEN
+\"1\"
+ELSE IF (vTipoBanca = 'MULTINACIONALES') THEN
+\"1\"
+ELSE IF (vTipoBanca = 'CORPORATIVA') THEN
+\"2\"
+ELSE IF (vTipoBanca = 'CORPORACIONES') THEN
+\"2\"
+ELSE IF (vTipoBanca = 'PREFERENCIAL') THEN
+\"3\"
+ELSE IF (vTipoBanca = 'PRIVADO') THEN
+\"4\"
+ELSE IF (vTipoBanca = 'EXCLUSIVO') THEN
+\"4\"
+ELSE
+\"0\"
+
+=+=+=+=
+         SqlType "12"
+         ParsedExpression " IF (vTipoBanca = 'INMOBILIARIA Y CONSTRUCCION') THEN \"1\" ELSE  IF (vTipoBanca = 'EMPRESAS A') THEN \"1\" ELSE  IF (vTipoBanca = 'EMPRESAS B') THEN \"1\" ELSE  IF (vTipoBanca = 'GRANDES EMPRESAS') THEN \"1\" ELSE  IF (vTipoBanca = 'EMPRESAS') THEN \"1\" ELSE  IF (vTipoBanca = 'MEDIANAS EMPRESAS') THEN \"1\" ELSE  IF (vTipoBanca = 'MASIVO EMPRESAS') THEN \"1\" ELSE  IF (vTipoBanca = 'MICRO EMPRESAS') THEN \"1\" ELSE  IF (vTipoBanca = 'PEQUENAS EMPRESAS') OR (vTipoBanca = 'PEQUEÑAS EMPRESAS') THEN \"1\" ELSE  IF (vTipoBanca = 'GGEE') THEN \"1\" ELSE  IF (vTipoBanca = 'MAYORISTAS') THEN \"1\" ELSE  IF (vTipoBanca = 'MULTINACIONALES') THEN \"1\" ELSE  IF (vTipoBanca = 'CORPORATIVA') THEN \"2\" ELSE  IF (vTipoBanca = 'CORPORACIONES') THEN \"2\" ELSE  IF (vTipoBanca = 'PREFERENCIAL') THEN \"3\" ELSE  IF (vTipoBanca = 'PRIVADO') THEN \"4\" ELSE  IF (vTipoBanca = 'EXCLUSIVO') THEN \"4\" ELSE \"0\""
+         StageVars "vTipoBanca"
          Precision "255"
          ColScale "0"
          ExtendedPrecision "0"
@@ -64338,10 +64502,9 @@ record
          Nullable "1"
          KeyPosition "0"
          DisplaySize "15"
-         Derivation "Lnk_Clientes.CLI_COLOR"
+         Derivation "vOrigenCta"
          Group "0"
-         ParsedDerivation "Lnk_Clientes.CLI_COLOR"
-         SourceColumn "Lnk_Clientes.CLI_COLOR"
+         ParsedDerivation "vOrigenCta"
          SortKey "0"
          SortType "0"
          TableDef "Saved\\LNK_DB2_Clientes\\Tabla_Clientes"
@@ -64351,6 +64514,7 @@ record
          PadNulls "0"
          SignOption "0"
          SortingOrder "0"
+         StageVars "vOrigenCta"
          ArrayHandling "0"
          SyncIndicator "0"
          PadChar ""
@@ -64363,30 +64527,27 @@ record
       END DSSUBRECORD
       BEGIN DSSUBRECORD
          Name "CLI_BANCA"
-         Description "<none>"
-         SqlType "12"
-         Precision "30"
+         SqlType "1"
+         Precision "0"
          Scale "0"
-         Nullable "1"
+         Nullable "0"
          KeyPosition "0"
-         DisplaySize "30"
-         Derivation "Lnk_Clientes.CLI_BANCA"
+         DisplaySize "0"
+         Derivation "vTipoBancaIF"
          Group "0"
-         ParsedDerivation "Lnk_Clientes.CLI_BANCA"
-         SourceColumn "Lnk_Clientes.CLI_BANCA"
+         ParsedDerivation "vTipoBancaIF"
          SortKey "0"
          SortType "0"
-         TableDef "Saved\\LNK_DB2_Clientes\\Tabla_Clientes"
          AllowCRLF "0"
          LevelNo "0"
          Occurs "0"
          PadNulls "0"
          SignOption "0"
          SortingOrder "0"
+         StageVars "vTipoBancaIF"
          ArrayHandling "0"
          SyncIndicator "0"
          PadChar ""
-         ColumnReference "CLI_BANCA"
          ExtendedPrecision "0"
          TaggedSubrec "0"
          OccursVarying "0"
@@ -64422,7 +64583,7 @@ record
 (
   RutCliente:string[max=10];
   CLI_COLOR:nullable string[max=15];
-  CLI_BANCA:nullable string[max=30];
+  CLI_BANCA:string;
 )
 =+=+=+=
       END DSSUBRECORD
@@ -65200,7 +65361,7 @@ record
       OLEType "CTransformerStage"
       Readonly "0"
       Name "Transformer_51"
-      NextID "10"
+      NextID "11"
       InputPins "V0S51P4"
       OutputPins "V0S51P2|V0S51P3|V0S51P5"
       MetaBag "CMetaProperty"
@@ -65966,7 +66127,7 @@ record
       END DSSUBRECORD
       StageVars "EtapaVarCab"
       LeftTextPos "815"
-      TopTextPos "342"
+      TopTextPos "347"
    END DSRECORD
    BEGIN DSRECORD
       Identifier "V0S51P3"
@@ -66274,7 +66435,7 @@ record
 =+=+=+=
       END DSSUBRECORD
       LeftTextPos "779"
-      TopTextPos "298"
+      TopTextPos "335"
    END DSRECORD
    BEGIN DSRECORD
       Identifier "V0S56"
