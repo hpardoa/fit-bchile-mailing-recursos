@@ -66,13 +66,14 @@ else
    cd /u/data/SGD/tmp/DataSets
 	rm -rf $NomProceso*
 	cd /u/data/SGD/tmp/DataSets/Node01
+  rm -rf $NomProceso*
    exit 99
 fi
- 
+
 ############################################################################
 if [ "$?" = "0" ]; then
 cp $arch_final $arch_resp
-compress $arch_resp 
+compress $arch_resp
       exit 0
 else
         exit 99
@@ -83,5 +84,3 @@ fi
 run_stat=$?
 echo "Status Code (run_stat): "$run_stat >> $archlog
 $datashome/dsjob -jobinfo $proyecto $sequencer >> $archlog
-
-
